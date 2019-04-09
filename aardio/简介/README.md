@@ -1,7 +1,12 @@
 # 简介
+[>\> 下载最新版本](http://bbs.aardio.com/portal.php?mod=view&aid=2)
+[>\> 官方论坛](http://bbs.aardio.com)
+
 aardio 专用于桌面软件快速开发，下载压缩包仅 6.x MB, 绿色软件解压即用 - 开发本软件的主要目的为作者自用自娱自乐、当然也欢迎大家自由自愿免费使用， 无论个人或企业都可以免费使用本软件。
 
 ## aardio编程语言
+[www.aardio.com](http://www.aardio.com)
+
 aardio是专用于桌面软件快速开发的新一代混合型编程语言 - 具有动态语言轻便、灵活的特性，而且又可以同时支持静态类型开发，象静态语言那样使用。aardio可以直接支持原生DLL，即使是外部EXE进程中的函数，也可以使用一句代码声明为普通的aardio函数对象( 原生call支持 )，aardio支持非常多的标准调用约定，例如 stdcall，cdecl，thiscall，fastcall，regparm(n) 等调用约定都可以支持。aardio虽然小，但支持的接口很丰富、可以支持com静态动态双接口，象VBS一样原生支持com对象。
 
 用一个简单的代码演示一下，下面的aardio代码定义了一个结构体：
