@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>aaudoc</title>
+  <link rel="icon" href="_images/favicon.ico">
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="//unpkg.com/docsify/lib/themes/vue.css">
+</head>
+
+<body>
+  <div id="app">Loading ...</div>
+  <script src="//unpkg.com/vue/dist/vue.js"></script>
+  <script src="//unpkg.com/docsify/lib/docsify.js"></script>
+  <script>
+    window.$docsify = {
+      auto2top: true,
+      coverpage: false,
+      executeScript: true,
+      loadSidebar: true,
+      loadNavbar: false,
+      mergeNavbar: true,
+      maxLevel: 6,
+      subMaxLevel: 6,
+      name: 'aaudoc',
+      markdown: {
+        breaks: true,
+      },
+      search: {
+        noData: '没有结果!',
+        placeholder: '搜索',
+      },
+      formatUpdated: '{MM}/{DD} {HH}:{mm}',
+      pagination: {
+        previousText: '上一章节',
+        nextText: '下一章节',
+      },
+      plugins: []
+    }
+    // 注册离线模式
+    if (typeof navigator.serviceWorker !== 'undefined') {
+      navigator.serviceWorker.register('./bin/sw.js')
+    }
+  </script>
+  <script src="//embed.runkit.com"></script>
+  <script src="//cdn.bootcss.com/zepto/1.2.0/zepto.min.js"></script>
+  <script src="./_bin/search.js"></script>
+  <script src="./_bin/code_tool.js"></script>
+  <script src="./_bin/aauHighlighter.js"></script>
+  <script src="//unpkg.com/docsify-pagination@2.3.5/dist/docsify-pagination.min.js"></script>
+  <script src="//unpkg.com/prismjs@1.15.0/components/prism-bash.min.js"></script>
+  <script src="//unpkg.com/prismjs@1.15.0/components/prism-markdown.min.js"></script>
+  <script src="//unpkg.com/docsify/lib/plugins/zoom-image.min.js"></script>
+</body>
+
+</html>
