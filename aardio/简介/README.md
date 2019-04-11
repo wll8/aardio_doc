@@ -1,6 +1,6 @@
 # 简介
-[>\> 下载最新版本](http://bbs.aardio.com/portal.php?mod=view&aid=2)
-[>\> 官方论坛](http://bbs.aardio.com)
+[下载最新版本](http://bbs.aardio.com/portal.php?mod=view&aid=2)
+[官方论坛](http://bbs.aardio.com)
 
 aardio 专用于桌面软件快速开发，下载压缩包仅 6.x MB, 绿色软件解压即用 - 开发本软件的主要目的为作者自用自娱自乐、当然也欢迎大家自由自愿免费使用， 无论个人或企业都可以免费使用本软件。
 
