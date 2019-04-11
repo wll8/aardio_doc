@@ -1,2 +1,3 @@
-aardio/_bin/auto_md.js
-aardio/_bin/tool.js
+**/node_modules
+aardio/_lib/auto_md.js
+aardio/_lib/tool.js
