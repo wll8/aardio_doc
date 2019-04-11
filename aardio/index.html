@@ -15,6 +15,7 @@
   <script src="//unpkg.com/docsify/lib/docsify.js"></script>
   <script>
     window.$docsify = {
+      repo: 'wll8/doc/tree/master/aardio',
       auto2top: true,
       coverpage: false,
       executeScript: true,
@@ -40,14 +41,13 @@
     }
     // 注册离线模式
     if (typeof navigator.serviceWorker !== 'undefined') {
-      navigator.serviceWorker.register('./bin/sw.js')
+      navigator.serviceWorker.register('_bin/sw.js')
     }
   </script>
-  <script src="//embed.runkit.com"></script>
   <script src="//cdn.bootcss.com/zepto/1.2.0/zepto.min.js"></script>
-  <script src="./_bin/search.js"></script>
-  <script src="./_bin/code_tool.js"></script>
-  <script src="./_bin/aauHighlighter.js"></script>
+  <script src="_bin/search.js"></script>
+  <script src="_bin/code_tool.js"></script>
+  <script src="_bin/aauHighlighter.js"></script>
   <script src="//unpkg.com/docsify-pagination@2.3.5/dist/docsify-pagination.min.js"></script>
   <script src="//unpkg.com/prismjs@1.15.0/components/prism-bash.min.js"></script>
   <script src="//unpkg.com/prismjs@1.15.0/components/prism-markdown.min.js"></script>
