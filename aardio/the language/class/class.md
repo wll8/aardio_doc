@@ -130,7 +130,7 @@ obj.func();
 当一个table对象调用成员函数时,默认会传递一个owner对象给函数。
 而在类创建的对象成员函数里，owner对象与this对象是指向同一个对象。
 
-this对象与owner对象的区别在于。 
+this对象与owner对象的区别在于。
 this是类内部指向当前创建对象的指针，this指针不会因为函数的table前缀改变而改变。而owner对象是会根据函数调用时函数名前缀的table对象而相应改变。
 
 请参考：[owner](the%20language/function/owner)
@@ -205,26 +205,26 @@ util.metaProperty库里面就使用了这种技巧，动态指定一个基类改
 
 类的直接继承也称为装饰继承。
 
-//创建一个基类 
+``` aau
+//创建一个基类
 base = class{
-a = 123;
-b = 456;
-c = 789
+    a = 123;
+    b = 456;
+    c = 789
 }
 namespace base{
-static = 123; //类的静态成员
+    static = 123; //类的静态成员
 }
 
 class inheritance{ //类的实例继承
 
-//构造函数
-ctor( )begin 
-this = ..base(); //调用基类构造对象原型。
-end;
+    //构造函数
+    ctor( )begin
+        this = ..base(); //调用基类构造对象原型。
+    end;
 
-c = "覆盖基类成员";
-d = "子类的新成员";
-
+    c = "覆盖基类成员";
+    d = "子类的新成员";
 }
 
 io.open()
@@ -232,11 +232,11 @@ obj = inheritance();//从子类创建对象
 
 //输出所有对象
 for(k,v in obj){
-io.print(k,v);
+    io.print(k,v);
 }
-
 execute("pause")
 io.close()
+```
 
 ## 类的间接继承 - 原型链继承
 
@@ -244,10 +244,11 @@ io.close()
 间接继承的好处继承原型指向静态的公用模板，并不会实际生成新的对象(浅拷贝)，可以占用较少的空间，但是其缺点是访问速度不如直接继承快，并且占用了_get元方法，当我们需要使用_get元方法来做一些其他的事（例如实现属性方法）时就比较麻烦。在间接继承中可以通过owner来访问当前对象（类似直接继承中的this对象）。
 
 
+``` aau
 base = class{
-a = 123;
-b = 456;
-c = 789
+   a = 123;
+   b = 456;
+   c = 789
 }
 class inheritance{
 
@@ -256,7 +257,6 @@ d = "子类的新成员";
 
 @{ _get = ..base() }; //get元方法可以指向一个table，也可以使用基类构造函数构建的对象
 }
-
 io.open()
 obj = inheritance();//从子类创建对象
 
@@ -271,6 +271,7 @@ io.print("这是挪用base表的成员", obj.a );
 
 execute("pause")
 io.close()
+```
 
 ## 属性元表
 
@@ -294,48 +295,53 @@ aardio的早期版本并没有属性表的概念，win.ui.controls库的设计�
 
 我们看下面win.ui.controls里的部分代码:
 
+``` aau
 class picturebox{
-ctor(tvalue){
-tvalue.style |= 0xE/*_SS_BITMAP*/;
-tvalue.cls = "static" 
-if(tvalue.edge) tvalue.exstyle |= 0x20000/*_WS_EX_STATICEDGE*/; 
-if(tvalue.transparent)tvalue.exstyle |= 0x20/*_WS_EX_TRANSPARENT*/;
-if(tvalue.notify)tvalue.style |= 0x100/*_SS_NOTIFY*/ 
-tvalue.style |= 0x2000000/*_WS_CLIPCHILDREN*/ | 0x4000000/*_WS_CLIPSIBLINGS*/;
-}
-@_metaProperty; //属性元素必须使用此变量名字 
+    ctor(tvalue){
+    tvalue.style |= 0xE/*_SS_BITMAP*/;
+    tvalue.cls = "static"
+    if(tvalue.edge) tvalue.exstyle |= 0x20000/*_WS_EX_STATICEDGE*/;
+    if(tvalue.transparent)tvalue.exstyle |= 0x20/*_WS_EX_TRANSPARENT*/;
+    if(tvalue.notify)tvalue.style |= 0x100/*_SS_NOTIFY*/
+    tvalue.style |= 0x2000000/*_WS_CLIPCHILDREN*/ | 0x4000000/*_WS_CLIPSIBLINGS*/;
+    }
+    @_metaProperty; //属性元素必须使用此变量名字
 }
 
 picturebox._metaProperty = win.ui.controls.metaProperty(
 
-image = {
-_get = function(){ 
-return null;
-}
-_set = function( value ){
-var pic,imgtype = ..win.ole.LoadHbitmapFromFile(v); 
-if( imgtype ==0x1/*_IMAGE_ICON*/ )
-{ 
-var style = ::GetWindowLong(owner.hwnd, 0xFFFFFFF0/*_GWL_STYLE*/); 
-::SetWindowLong(owner.hwnd,0xFFFFFFF0/*_GWL_STYLE*/,style | 0x3/*_SS_ICON*/ );
-::SendMessage(owner.hwnd,0x170/*_STM_SETICON*/, topointer(0x1/*_IMAGE_ICON*/),pic); 
-}
-else if( imgtype ==0x0/*_IMAGE_BITMAP*/ ){
-var style = ::GetWindowLong(owner.hwnd, 0xFFFFFFF0/*_GWL_STYLE*/); 
-::SetWindowLong(owner.hwnd,0xFFFFFFF0/*_GWL_STYLE*/,style | 0xE/*_SS_BITMAP*/ );
-SendMessage(owner.hwnd,0x172/*_STM_SETIMAGE*/, topointer(0x0/*_IMAGE_BITMAP*/),pic);
-}
-} 
-}; 
+    image = {
+        _get = function(){
+            return null;
+        }
+        _set = function( value ){
+            var pic,imgtype =  ..win.ole.LoadHbitmapFromFile(v);
+            if( imgtype ==0x1/*_IMAGE_ICON*/ )
+            {
+                 var style   =   ::GetWindowLong(owner.hwnd,  0xFFFFFFF0/*_GWL_STYLE*/);
+                 ::SetWindowLong(owner.hwnd,0xFFFFFFF0/*_GWL_STYLE*/,style | 0x3/*_SS_ICON*/ );
+                 ::SendMessage(owner.hwnd,0x170/*_STM_SETICON*/, topointer(0x1/*_IMAGE_ICON*/),pic);
+            }
+            else if( imgtype ==0x0/*_IMAGE_BITMAP*/ ){
+                 var style   =   ::GetWindowLong(owner.hwnd,  0xFFFFFFF0/*_GWL_STYLE*/);
+                 ::SetWindowLong(owner.hwnd,0xFFFFFFF0/*_GWL_STYLE*/,style | 0xE/*_SS_BITMAP*/ );
+                 SendMessage(owner.hwnd,0x172/*_STM_SETIMAGE*/, topointer(0x0/*_IMAGE_BITMAP*/),pic);
+            }
+        }
+    };
 )
+
 //红色部分创建了属性元表、蓝色部分创建了一个属性字段
+```
 
 当我们在窗体winform上创建一个picturebox控件，我们可以直接通过winform.picturebox.image读写属性。当然图片在屏幕的控件上，而不是picturebox这个对象里面，无论是读或写都要从控件中实时读写，这就需要把他们映射为函数，我们看蓝色部分的代码，当省略_get时可以创建一个只写属性，而省略_set时可以创建一个只读属性，你可能在C#里看过类似的语法。
- 我们可以仅仅在需要属性表时加载
-util.metaProperty，这样不会影响普通表存取的速度。
- 无论是util.metaProperty的实现、还是util.metaProperty的使用都非常的简洁、直观并易于扩展。
 
- 属性表的意义在于扩展了_get _set元方法、使每一个属性字段都可以定义自已的_get _set方法 ， 方便的定义只读、只写属性。属性元表不但可以自定义对象的元方法，而且可以通过属性表定义对象的原型，该原型（属性表）是支持多级继承的 。并且在多级继承中始终可以访问当前owner对象。
+?> 我们可以仅仅在需要属性表时加载
+util.metaProperty，这样不会影响普通表存取的速度。
+
+?> 无论是util.metaProperty的实现、还是util.metaProperty的使用都非常的简洁、直观并易于扩展。
+
+?> 属性表的意义在于扩展了_get _set元方法、`使每一个属性字段都可以定义自已的_get _set方法` ， 方便的定义只读、只写属性。属性元表不但可以自定义对象的元方法，而且可以通过属性表定义对象的原型，`该原型（属性表）是支持多级继承的` 。并且在多级继承中始终可以访问当前owner对象。
 
 ## 信息隐藏、成员保护
 

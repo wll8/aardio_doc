@@ -175,7 +175,8 @@ io.print( 递归( 5 )   )
 
 
  调用函数时，不管有没有参数，都要使用括号，不能省略括号，如下是错误的写法;
-io.open; ![](../../icon/error.gif)
+
+!> io.open; ![](../../icon/error.gif)
 
 ## 函数参数
 
@@ -222,7 +223,7 @@ io.print(str) //显示全局变量值
 根据最少知道原则，在函数中应尽量避免使用全局对象，尤其要避免修改全局对象。
 并且局部变量存取速度更快。无论是为了效率，还是降低程序复杂度，都应当优先使用局部变量。
 
-更多关于局部变量的内容请参考：[局部变量](the%20language/variables%20constants#var) [定义局部变量](the%20language/statements/assignment#var) 
+更多关于局部变量的内容请参考：[局部变量](the%20language/variables%20constants#var) [定义局部变量](the%20language/statements/assignment#var)
 
 ## 定义成员函数
 

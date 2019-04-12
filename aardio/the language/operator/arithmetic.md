@@ -4,7 +4,7 @@
 
 如果是其他类据类型则查找对象的元方法进行运算，如果对象并未定义元方法则抛出异常。
 
-![](../../icon/warning.gif) aardio会将引号前后的+运算符自动转换为字符串[连接运算符](the%20language/operator/concat) ++
+!> ![](../../icon/warning.gif) aardio会将引号前后的+运算符自动转换为字符串[连接运算符](the%20language/operator/concat) ++
 
 |  运算符 |  说明 |
 | --- | --- |
@@ -15,4 +15,3 @@
 |  ** |  幂 |
 | % |  模 |
 
-###

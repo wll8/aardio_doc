@@ -7,9 +7,9 @@
 每个table都可以指定一个[元表(metatable)](libraries/kernel/table/meta)，在元表中可以重载运算符。
 重载的操作符实际上是一个函数，称之为表的[元方法](the%20language/%D4%CB%CB%E3%B7%FB/2/metatable)。
 
-以@操作符表示元表。例如tab@表示tab的元表。
-也可以在表构造器中直接用@指定元表，例如：tab={ n=123;n2=456;@{ _type = "自定义元表"} }
-table的元表可以是table自已。例: tab@ = tab;
+以@操作符表示元表。例如tab@表示tab的元表。也可以在表构造器中直接用@指定元表，例如：tab={ n=123;n2=456;@{ _type = "自定义元表"} }
+
+?> table的元表可以是table自已。例: tab@ = tab;
 
  下面是使用元表重载运算符的示例：
 
@@ -61,20 +61,23 @@ io.print( c ) //显示22
 
 一个常见的技巧，table是按引用比较的，即使他们的值相同，但只要不是指向同一个对象都被认为是不相等，
 我们通过重载==运算符可以让两个tab按他们的存储值比较。
-io.open();
 
+``` aau
+io.open();
 tab = { x=10 ; y=20 };
 tab2 = { x=10 ; y=20 }
 io.print( tab == tab2 ); //默认是按引用比较，不指向同一个对象就不相等，结果为false
 
 //创建一个元素，元表中的__eq函数重载比较运算符"=="。
 tab@ = {
-_eq = function( b){ 
-return ( (owner.x == b.x) and (owner.y == b.y) )
-};
+    _eq = function( b){
+        return ( (owner.x == b.x) and (owner.y == b.y) )
+    };
 }
 tab2@ = tab@;//为tab2添加元表， 比较运算符需要为两个操作数添加同一个元表。
+
 io.print( tab==tab2 ); //现在可以使用重载的==操作符按值比较了
+```
 
 ## 避免元方法递归调用导致溢出
 
@@ -96,12 +99,12 @@ io.print( dic )  //io.print会自动调用tostring(参数)
 
 例如你有这么一个对象dic，他重载了_tostring这个元方法。
 那么在调用 io.print( dic ) 时就会自动调用 io.print( tostring(dic) )
-可是你在元方法里又写了..io.print( owner ) ，问题就来了，owner就是他自已，这样又要调用tostring(owner) 而这样又会调用元方法，而元方法又再次调用 tostring(owner) 这样没完没了的递归，所以就出错了。
+可是你在元方法里又写了..io.print( owner ) ，问题就来了，`owner就是他自已`，这样又要调用`tostring(owner) 而这样又会调用元方法，而元方法又再次调用 tostring(owner)` 这样没完没了的递归，所以就出错了。
 
 这里只是举一个例子，类似的还有在索引元方法_get 的内部写owner["key"]
-owner["key"] 又会调用 _get元方法，而_get元方法又会调用 owner["key"] 也是这样没完没了。
+`owner["key"] 又会调用 _get元方法，而_get元方法又会调用 owner["key"]` 也是这样没完没了。
 
-aardio为了避免这个问题，提供了raw操作符。
+**aardio为了避免这个问题，提供了raw操作符。**
 而[[]] 就是一个raw操作符，他与[]不同的是，他不会调用元方法，也就是不能重载。
 也就是说，在_get元方法里写 owner[["key"]] 就可以避免出现上述的递归调用错误。
 
