@@ -1,0 +1,479 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gbk" />
+<title>aardio编程语言 - 官方论坛 -  </title>
+
+<meta name="keywords" content="aardio,编程语言,技术交流,桌面软件,桌面软件开发" />
+<meta name="description" content="aardio:网站/桌面软件快速开发 " />
+<meta name="generator" content="Discuz! X3.4" />
+<meta name="author" content="Discuz! Team and Comsenz UI Team" />
+<meta name="copyright" content="2001-2017 Comsenz Inc." />
+<meta name="MSSmartTagsPreventParsing" content="True" />
+<meta http-equiv="MSThemeCompatible" content="Yes" />
+<base href="" /><link rel="stylesheet" type="text/css" href="http://bbs.aardio.com/data/cache/style_1_common.css?Sto" /><link rel="stylesheet" type="text/css" href="http://bbs.aardio.com/data/cache/style_1_forum_index.css?Sto" /><script type="text/javascript">var STYLEID = '1', STATICURL = 'static/', IMGDIR = 'static/image/common', VERHASH = 'Sto', charset = 'gbk', discuz_uid = '0', cookiepre = 'rT0K_732a_', cookiedomain = '.aardio.com', cookiepath = '/', showusercard = '1', attackevasive = '0', disallowfloat = 'newthread', creditnotice = '1|专家分|,2|金币|,3|活力值|,4|银币|', defaultstyle = '', REPORTURL = 'aHR0cDovL2Jicy5hYXJkaW8uY29tL2RhdGEvYXR0YWNobWVudC9mb3J1bS8yMDE4MDgvMDcvMTgyOTA1Y3dsOHNzdXN6bXdsZHdrMi5qcGcudGh1bWIuanBn', SITEURL = 'http://bbs.aardio.com/', JSPATH = 'static/js/', CSSPATH = 'data/cache/style_', DYNAMICURL = '';</script>
+<script src="http://bbs.aardio.com/static/js/common.js?Sto" type="text/javascript"></script>
+<meta name="application-name" content="aardio官方社区" />
+<meta name="msapplication-tooltip" content="aardio官方社区" />
+<meta name="msapplication-task" content="name=首页;action-uri=http://bbs.aardio.com/forum.php;icon-uri=http://bbs.aardio.com/static/image/common/bbs.ico" />
+<meta name="msapplication-task" content="name=空间;action-uri=http://bbs.aardio.com/home.php;icon-uri=http://bbs.aardio.com/static/image/common/home.ico" /><script src="http://bbs.aardio.com/static/js/forum.js?Sto" type="text/javascript"></script>
+</head>
+
+<body id="nv_forum" class="pg_index" onkeydown="if(event.keyCode==27) return false;">
+<div id="append_parent"></div><div id="ajaxwaitid"></div>
+<div id="toptb" class="cl">
+<div class="wp">
+<div class="z"></div>
+<div class="y">
+<a id="switchblind" href="javascript:;" onclick="toggleBlind(this)" title="开启辅助访问" class="switchblind">开启辅助访问</a>
+<a href="http://bbs.aardio.com/plugin.php?id=fb_opinion:main" >意见、BUG反馈</a></div>
+</div>
+</div>
+
+<div id="qmenu_menu" class="p_pop blk" style="display: none;">
+<div class="ptm pbw hm">
+请 <a href="javascript:;" class="xi2" onclick="lsSubmit()"><strong>登录</strong></a> 后使用快捷导航<br />没有帐号？<a href="http://bbs.aardio.com/member.php?mod=register" class="xi2 xw1">注册会员</a>
+</div>
+<div id="fjump_menu" class="btda"></div></div><div id="hd">
+<div class="wp">
+<div class="hdc cl"><h2><a href="http://bbs.aardio.com/" title="aardio官方社区"><img src="http://bbs.aardio.com/static/image/common/aardio.png" alt="aardio官方社区" border="0" /></a></h2><div class="fastlg cl">
+<span id="return_ls" style="display:none"></span>
+<div class="y pns">
+<a href="http://bbs.aardio.com/member.php?mod=logging&amp;action=login" onclick="showWindow('login', this.href)">登录</a> <span class="pipe">|</span> <a href="http://bbs.aardio.com/member.php?mod=register">注册会员</a> 
+</div>
+</div>
+</div>
+
+<div id="nv">
+<a href="javascript:;" id="qmenu" onmouseover="delayShow(this, function () {showMenu({'ctrlid':'qmenu','pos':'34!','ctrlclass':'a','duration':2});showForummenu();})">快捷导航</a>
+<ul><li class="a" id="mn_forum" ><a href="http://bbs.aardio.com/forum.php" hidefocus="true" title="BBS"  >首页<span>BBS</span></a></li><li id="mn_N9e23" ><a href="http://www.aardio.com" hidefocus="true" title="aardio 最新版本下载，aardio是绿色软件不需要安装，解压缩即可使用" target="_blank"  >下载 aardio（5.9 MB ）<span>aardio 最新版本下载，aardio是绿色软件不需要安装，解压缩即可使用</span></a></li><li id="mn_N1411" ><a href="http://bbs.aardio.com/forum.php?mod=forumdisplay&amp;fid=133" hidefocus="true" title="aardio程序开发快速入门教程"  >教程<span>aardio程序开发快速入门教程</span></a></li><li id="mn_N1891" onmouseover="showMenu({'ctrlid':this.id,'ctrlclass':'hover','duration':2})"><a href="http://bbs.aardio.com/doc" hidefocus="true" title="aardio编程技术 - 文档中心" target="_blank"  >文档<span>aardio编程技术 - 文档中心</span></a></li></ul>
+</div>
+<ul class="p_pop h_pop" id="mn_N1891_menu" style="display: none"><li><a href="http://www.aardio.com" hidefocus="true" target="_blank" >aardio 简介</a></li><li><a href="http://bbs.aardio.com/doc" hidefocus="true" target="_blank" >aardio 文档</a></li><li><a href="http://social.msdn.microsoft.com/Search/en-us?query=" hidefocus="true" target="_blank" >微软 MSDN</a></li><li><a href="https://developer.mozilla.org/zh-CN/docs/Web" hidefocus="true" target="_blank" >MDN Web 文档</a></li></ul><div id="mu" class="cl">
+</div><div id="scbar" class="cl">
+<form id="scbar_form" method="post" autocomplete="off" onsubmit="searchFocus($('scbar_txt'))" action="http://bbs.aardio.com/search.php?searchsubmit=yes" target="_blank">
+<input type="hidden" name="mod" id="scbar_mod" value="search" />
+<input type="hidden" name="formhash" value="044cd341" />
+<input type="hidden" name="srchtype" value="title" />
+<input type="hidden" name="srhfid" value="" />
+<input type="hidden" name="srhlocality" value="forum::index" />
+<table cellspacing="0" cellpadding="0">
+<tr>
+<td class="scbar_icon_td"></td>
+<td class="scbar_txt_td"><input type="text" name="srchtxt" id="scbar_txt" value="请输入搜索内容" autocomplete="off" x-webkit-speech speech /></td>
+<td class="scbar_type_td"><a href="javascript:;" id="scbar_type" class="xg1" onclick="showMenu(this.id)" hidefocus="true">搜索</a></td>
+<td class="scbar_btn_td"><button type="submit" name="searchsubmit" id="scbar_btn" sc="1" class="pn pnc" value="true"><strong class="xi2">搜索</strong></button></td>
+<td class="scbar_hot_td">
+<div id="scbar_hot">
+</div>
+</td>
+</tr>
+</table>
+</form>
+</div>
+<ul id="scbar_type_menu" class="p_pop" style="display: none;"><li><a href="javascript:;" rel="forum" class="curtype">帖子</a></li><li><a href="javascript:;" rel="user">用户</a></li></ul>
+<script type="text/javascript">
+initSearchmenu('scbar', '');
+</script>
+</div>
+</div>
+
+
+<div id="wp" class="wp">
+<div id="pt" class="bm cl">
+<div class="z">
+<a href="http://bbs.aardio.com/" class="nvhm" title="首页">aardio官方社区</a><em>&raquo;</em><a href="http://bbs.aardio.com/forum.php">首页</a></div>
+<div class="z"></div>
+</div>
+
+
+
+<style id="diy_style" type="text/css"></style>
+
+<div class="wp">
+<!--[diy=diy1]--><div id="diy1" class="area"></div><!--[/diy]-->
+</div>
+
+<div id="ct" class="wp cl">
+<div id="chart" class="bm bw0 cl">
+<p class="chart z">今日: <em>0</em><span class="pipe">|</span>昨日: <em>0</em><span class="pipe">|</span>帖子: <em>45241</em><span class="pipe">|</span>会员: <em>16140</em><span class="pipe">|</span>欢迎新会员: <em><a href="http://bbs.aardio.com/home.php?mod=space&amp;username=gqxsunshine" target="_blank" class="xi2">gqxsunshine</a></em></p>
+<div class="y">
+<a href="http://bbs.aardio.com/forum.php?mod=guide&amp;view=new" title="最新回复" class="xi2">最新回复</a></div>
+</div>
+<!--[diy=diy_chart]--><div id="diy_chart" class="area"></div><!--[/diy]-->
+<div class="mn">
+
+
+<div class="fl bm">
+<div class="bm bmw  flg cl">
+<div class="bm_h cl">
+<span class="o">
+<img id="category_36_img" src="http://bbs.aardio.com/static/image/common/collapsed_no.gif" title="收起/展开" alt="收起/展开" onclick="toggle_collapse('category_36');" />
+</span>
+<h2><a href="http://bbs.aardio.com/forum.php?gid=36" style="">aardio编程语言</a></h2>
+</div>
+<div id="category_36" class="bm_c" style="">
+<table cellspacing="0" cellpadding="0" class="fl_tb">
+<tr><td class="fl_g" width="24.9%">
+<div class="fl_icn_g">
+<a href="http://bbs.aardio.com/forum.php?mod=forumdisplay&fid=37"><img src="http://bbs.aardio.com/static/image/common/forum.gif" alt="aardio" /></a>
+</div>
+<dl>
+<dt><a href="http://bbs.aardio.com/forum.php?mod=forumdisplay&fid=37">aardio</a></dt>
+<dd><em>主题: 1493</em>, <em>帖数: 9303</em></dd><dd>
+<a href="http://bbs.aardio.com/forum.php?mod=redirect&amp;tid=13416&amp;goto=lastpost#lastpost">最后发表: 2018-9-10 14:41</a>
+</dd>
+</dl>
+</td>
+<td class="fl_g" width="24.9%">
+<div class="fl_icn_g">
+<a href="http://bbs.aardio.com/forum.php?mod=forumdisplay&fid=39"><img src="http://bbs.aardio.com/static/image/common/forum.gif" alt="源码分享" /></a>
+</div>
+<dl>
+<dt><a href="http://bbs.aardio.com/forum.php?mod=forumdisplay&fid=39">源码分享</a></dt>
+<dd><em>主题: 681</em>, <em>帖数: 8283</em></dd><dd>
+<a href="http://bbs.aardio.com/forum.php?mod=redirect&amp;tid=31037&amp;goto=lastpost#lastpost">最后发表: 2018-10-18 22:04</a>
+</dd>
+</dl>
+</td>
+<td class="fl_g" width="24.9%">
+<div class="fl_icn_g">
+<a href="http://bbs.aardio.com/forum.php?mod=forumdisplay&fid=132"><img src="http://bbs.aardio.com/static/image/common/forum.gif" alt="经验心得" /></a>
+</div>
+<dl>
+<dt><a href="http://bbs.aardio.com/forum.php?mod=forumdisplay&fid=132">经验心得</a></dt>
+<dd><em>主题: 42</em>, <em>帖数: 576</em></dd><dd>
+<a href="http://bbs.aardio.com/forum.php?mod=redirect&amp;tid=31039&amp;goto=lastpost#lastpost">最后发表: 2018-8-3 12:47</a>
+</dd>
+</dl>
+</td>
+<td class="fl_g" width="24.9%">
+<div class="fl_icn_g">
+<a href="http://bbs.aardio.com/forum.php?mod=forumdisplay&fid=133"><img src="http://bbs.aardio.com/static/image/common/forum.gif" alt="教程专版" /></a>
+</div>
+<dl>
+<dt><a href="http://bbs.aardio.com/forum.php?mod=forumdisplay&fid=133">教程专版</a></dt>
+<dd><em>主题: 64</em>, <em>帖数: 1661</em></dd><dd>
+<a href="http://bbs.aardio.com/forum.php?mod=redirect&amp;tid=31058&amp;goto=lastpost#lastpost">最后发表: 2018-8-13 18:05</a>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="fl_row">
+<td class="fl_g" width="24.9%">
+<div class="fl_icn_g">
+<a href="http://bbs.aardio.com/forum.php?mod=forumdisplay&fid=104"><img src="http://bbs.aardio.com/static/image/common/forum.gif" alt="开发工具箱" /></a>
+</div>
+<dl>
+<dt><a href="http://bbs.aardio.com/forum.php?mod=forumdisplay&fid=104">开发工具箱</a></dt>
+<dd><em>主题: 55</em>, <em>帖数: 484</em></dd><dd>
+<a href="http://bbs.aardio.com/forum.php?mod=redirect&amp;tid=7382&amp;goto=lastpost#lastpost">最后发表: 2018-7-1 22:44</a>
+</dd>
+</dl>
+</td>
+<td width="24.9%">&nbsp;</td><td width="24.9%">&nbsp;</td><td width="24.9%">&nbsp;</td></tr>
+</table>
+</div>
+</div><div class="bm bmw  flg cl">
+<div class="bm_h cl">
+<span class="o">
+<img id="category_38_img" src="http://bbs.aardio.com/static/image/common/collapsed_no.gif" title="收起/展开" alt="收起/展开" onclick="toggle_collapse('category_38');" />
+</span>
+<h2><a href="http://bbs.aardio.com/forum.php?gid=38" style="">标准库、扩展库</a></h2>
+</div>
+<div id="category_38" class="bm_c" style="">
+<table cellspacing="0" cellpadding="0" class="fl_tb">
+<tr><td class="fl_g" width="24.9%">
+<div class="fl_icn_g">
+<a href="http://bbs.aardio.com/forum.php?mod=forumdisplay&fid=42"><img src="http://bbs.aardio.com/static/image/common/forum.gif" alt="winform(win)" /></a>
+</div>
+<dl>
+<dt><a href="http://bbs.aardio.com/forum.php?mod=forumdisplay&fid=42">winform(win)</a></dt>
+<dd><em>主题: 803</em>, <em>帖数: 4354</em></dd><dd>
+<a href="http://bbs.aardio.com/forum.php?mod=redirect&amp;tid=31025&amp;goto=lastpost#lastpost">最后发表: 2018-8-29 15:10</a>
+</dd>
+</dl>
+</td>
+<td class="fl_g" width="24.9%">
+<div class="fl_icn_g">
+<a href="http://bbs.aardio.com/forum.php?mod=forumdisplay&fid=41"><img src="http://bbs.aardio.com/static/image/common/forum.gif" alt="web.form" /></a>
+</div>
+<dl>
+<dt><a href="http://bbs.aardio.com/forum.php?mod=forumdisplay&fid=41">web.form</a></dt>
+<dd><em>主题: 882</em>, <em>帖数: 5266</em></dd><dd>
+<a href="http://bbs.aardio.com/forum.php?mod=redirect&amp;tid=31076&amp;goto=lastpost#lastpost">最后发表: 2018-9-10 16:11</a>
+</dd>
+</dl>
+</td>
+<td class="fl_g" width="24.9%">
+<div class="fl_icn_g">
+<a href="http://bbs.aardio.com/forum.php?mod=forumdisplay&fid=168"><img src="http://bbs.aardio.com/static/image/common/forum.gif" alt="web.kit/web.blink" /></a>
+</div>
+<dl>
+<dt><a href="http://bbs.aardio.com/forum.php?mod=forumdisplay&fid=168">web.kit/web.blink</a></dt>
+<dd><em>主题: 83</em>, <em>帖数: 413</em></dd><dd>
+<a href="http://bbs.aardio.com/forum.php?mod=redirect&amp;tid=31115&amp;goto=lastpost#lastpost">最后发表: 2019-3-16 16:52</a>
+</dd>
+</dl>
+</td>
+<td class="fl_g" width="24.9%">
+<div class="fl_icn_g">
+<a href="http://bbs.aardio.com/forum.php?mod=forumdisplay&fid=128"><img src="http://bbs.aardio.com/static/image/common/forum.gif" alt="htmlayout/sciter" /></a>
+</div>
+<dl>
+<dt><a href="http://bbs.aardio.com/forum.php?mod=forumdisplay&fid=128">htmlayout/sciter</a></dt>
+<dd><em>主题: 253</em>, <em>帖数: 2375</em></dd><dd>
+<a href="http://bbs.aardio.com/forum.php?mod=redirect&amp;tid=31097&amp;goto=lastpost#lastpost">最后发表: 2018-9-11 12:11</a>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="fl_row">
+<td class="fl_g" width="24.9%">
+<div class="fl_icn_g">
+<a href="http://bbs.aardio.com/forum.php?mod=forumdisplay&fid=54"><img src="http://bbs.aardio.com/static/image/common/forum.gif" alt="模式匹配、文本分析(string)" /></a>
+</div>
+<dl>
+<dt><a href="http://bbs.aardio.com/forum.php?mod=forumdisplay&fid=54">模式匹配、文本分析(string)</a></dt>
+<dd><em>主题: 335</em>, <em>帖数: 1937</em></dd><dd>
+<a href="http://bbs.aardio.com/forum.php?mod=redirect&amp;tid=31093&amp;goto=lastpost#lastpost">最后发表: 2018-9-12 10:01</a>
+</dd>
+</dl>
+</td>
+<td class="fl_g" width="24.9%">
+<div class="fl_icn_g">
+<a href="http://bbs.aardio.com/forum.php?mod=forumdisplay&fid=55"><img src="http://bbs.aardio.com/static/image/common/forum.gif" alt="文件操作、批量处理(fsys,io)" /></a>
+</div>
+<dl>
+<dt><a href="http://bbs.aardio.com/forum.php?mod=forumdisplay&fid=55">文件操作、批量处理(fsys,io)</a></dt>
+<dd><em>主题: 166</em>, <em>帖数: 1015</em></dd><dd>
+<a href="http://bbs.aardio.com/forum.php?mod=redirect&amp;tid=6657&amp;goto=lastpost#lastpost">最后发表: 2018-8-6 14:48</a>
+</dd>
+</dl>
+</td>
+<td class="fl_g" width="24.9%">
+<div class="fl_icn_g">
+<a href="http://bbs.aardio.com/forum.php?mod=forumdisplay&fid=43"><img src="http://bbs.aardio.com/static/image/common/forum.gif" alt="网络应用(inet,wsock)" /></a>
+</div>
+<dl>
+<dt><a href="http://bbs.aardio.com/forum.php?mod=forumdisplay&fid=43">网络应用(inet,wsock)</a></dt>
+<dd><em>主题: 312</em>, <em>帖数: 2003</em></dd><dd>
+<a href="http://bbs.aardio.com/forum.php?mod=redirect&amp;tid=31071&amp;goto=lastpost#lastpost">最后发表: 2018-8-15 10:08</a>
+</dd>
+</dl>
+</td>
+<td class="fl_g" width="24.9%">
+<div class="fl_icn_g">
+<a href="http://bbs.aardio.com/forum.php?mod=forumdisplay&fid=47"><img src="http://bbs.aardio.com/static/image/common/forum.gif" alt="操作系统(sys,win)" /></a>
+</div>
+<dl>
+<dt><a href="http://bbs.aardio.com/forum.php?mod=forumdisplay&fid=47">操作系统(sys,win)</a></dt>
+<dd><em>主题: 63</em>, <em>帖数: 380</em></dd><dd>
+<a href="http://bbs.aardio.com/forum.php?mod=redirect&amp;tid=6120&amp;goto=lastpost#lastpost">最后发表: 2018-9-1 20:39</a>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="fl_row">
+<td class="fl_g" width="24.9%">
+<div class="fl_icn_g">
+<a href="http://bbs.aardio.com/forum.php?mod=forumdisplay&fid=52"><img src="http://bbs.aardio.com/static/image/common/forum.gif" alt="内存数据库(sqlite)" /></a>
+</div>
+<dl>
+<dt><a href="http://bbs.aardio.com/forum.php?mod=forumdisplay&fid=52">内存数据库(sqlite)</a></dt>
+<dd><em>主题: 86</em>, <em>帖数: 547</em></dd><dd>
+<a href="http://bbs.aardio.com/forum.php?mod=redirect&amp;tid=31042&amp;goto=lastpost#lastpost">最后发表: 2018-8-3 13:26</a>
+</dd>
+</dl>
+</td>
+<td class="fl_g" width="24.9%">
+<div class="fl_icn_g">
+<a href="http://bbs.aardio.com/forum.php?mod=forumdisplay&fid=53"><img src="http://bbs.aardio.com/static/image/common/forum.gif" alt="数据库(sqlServer,access)" /></a>
+</div>
+<dl>
+<dt><a href="http://bbs.aardio.com/forum.php?mod=forumdisplay&fid=53">数据库(sqlServer,access)</a></dt>
+<dd><em>主题: 100</em>, <em>帖数: 538</em></dd><dd>
+<a href="http://bbs.aardio.com/forum.php?mod=redirect&amp;tid=31035&amp;goto=lastpost#lastpost">最后发表: 2018-7-31 15:18</a>
+</dd>
+</dl>
+</td>
+<td class="fl_g" width="24.9%">
+<div class="fl_icn_g">
+<a href="http://bbs.aardio.com/forum.php?mod=forumdisplay&fid=50"><img src="http://bbs.aardio.com/static/image/common/forum.gif" alt="COM/ActiveX(com)" /></a>
+</div>
+<dl>
+<dt><a href="http://bbs.aardio.com/forum.php?mod=forumdisplay&fid=50">COM/ActiveX(com)</a></dt>
+<dd><em>主题: 206</em>, <em>帖数: 1271</em></dd><dd>
+<a href="http://bbs.aardio.com/forum.php?mod=redirect&amp;tid=22540&amp;goto=lastpost#lastpost">最后发表: 2018-6-22 16:15</a>
+</dd>
+</dl>
+</td>
+<td class="fl_g" width="24.9%">
+<div class="fl_icn_g">
+<a href="http://bbs.aardio.com/forum.php?mod=forumdisplay&fid=56"><img src="http://bbs.aardio.com/static/image/common/forum.gif" alt="静态类型编程(raw)" /></a>
+</div>
+<dl>
+<dt><a href="http://bbs.aardio.com/forum.php?mod=forumdisplay&fid=56">静态类型编程(raw)</a></dt>
+<dd><em>主题: 90</em>, <em>帖数: 561</em></dd><dd>
+<a href="http://bbs.aardio.com/forum.php?mod=redirect&amp;tid=22369&amp;goto=lastpost#lastpost">最后发表: 2018-4-1 13:42</a>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="fl_row">
+<td class="fl_g" width="24.9%">
+<div class="fl_icn_g">
+<a href="http://bbs.aardio.com/forum.php?mod=forumdisplay&fid=49"><img src="http://bbs.aardio.com/static/image/common/forum.gif" alt="多线程(thread)" /></a>
+</div>
+<dl>
+<dt><a href="http://bbs.aardio.com/forum.php?mod=forumdisplay&fid=49">多线程(thread)</a></dt>
+<dd><em>主题: 110</em>, <em>帖数: 659</em></dd><dd>
+<a href="http://bbs.aardio.com/forum.php?mod=redirect&amp;tid=31098&amp;goto=lastpost#lastpost">最后发表: 2018-9-11 22:14</a>
+</dd>
+</dl>
+</td>
+<td class="fl_g" width="24.9%">
+<div class="fl_icn_g">
+<a href="http://bbs.aardio.com/forum.php?mod=forumdisplay&fid=86"><img src="http://bbs.aardio.com/static/image/common/forum.gif" alt="协同程序(fiber,coroutine)" /></a>
+</div>
+<dl>
+<dt><a href="http://bbs.aardio.com/forum.php?mod=forumdisplay&fid=86">协同程序(fiber,coroutine)</a></dt>
+<dd><em>主题: 6</em>, <em>帖数: 28</em></dd><dd>
+<a href="http://bbs.aardio.com/forum.php?mod=redirect&amp;tid=10439&amp;goto=lastpost#lastpost">最后发表: 2014-9-11 15:07</a>
+</dd>
+</dl>
+</td>
+<td class="fl_g" width="24.9%">
+<div class="fl_icn_g">
+<a href="http://bbs.aardio.com/forum.php?mod=forumdisplay&fid=48"><img src="http://bbs.aardio.com/static/image/common/forum.gif" alt="进程控制(process)" /></a>
+</div>
+<dl>
+<dt><a href="http://bbs.aardio.com/forum.php?mod=forumdisplay&fid=48">进程控制(process)</a></dt>
+<dd><em>主题: 76</em>, <em>帖数: 402</em></dd><dd>
+<a href="http://bbs.aardio.com/forum.php?mod=redirect&amp;tid=31048&amp;goto=lastpost#lastpost">最后发表: 2018-8-4 13:37</a>
+</dd>
+</dl>
+</td>
+<td class="fl_g" width="24.9%">
+<div class="fl_icn_g">
+<a href="http://bbs.aardio.com/forum.php?mod=forumdisplay&fid=46"><img src="http://bbs.aardio.com/static/image/common/forum.gif" alt="自动化(key,mouse,winex)" /></a>
+</div>
+<dl>
+<dt><a href="http://bbs.aardio.com/forum.php?mod=forumdisplay&fid=46">自动化(key,mouse,winex)</a></dt>
+<dd><em>主题: 242</em>, <em>帖数: 1459</em></dd><dd>
+<a href="http://bbs.aardio.com/forum.php?mod=redirect&amp;tid=22623&amp;goto=lastpost#lastpost">最后发表: 2018-7-15 00:36</a>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="fl_row">
+<td class="fl_g" width="24.9%">
+<div class="fl_icn_g">
+<a href="http://bbs.aardio.com/forum.php?mod=forumdisplay&fid=44"><img src="http://bbs.aardio.com/static/image/common/forum.gif" alt="图形图像(gdip,soImage)" /></a>
+</div>
+<dl>
+<dt><a href="http://bbs.aardio.com/forum.php?mod=forumdisplay&fid=44">图形图像(gdip,soImage)</a></dt>
+<dd><em>主题: 123</em>, <em>帖数: 1082</em></dd><dd>
+<a href="http://bbs.aardio.com/forum.php?mod=redirect&amp;tid=13660&amp;goto=lastpost#lastpost">最后发表: 2018-6-20 20:18</a>
+</dd>
+</dl>
+</td>
+<td class="fl_g" width="24.9%">
+<div class="fl_icn_g">
+<a href="http://bbs.aardio.com/forum.php?mod=forumdisplay&fid=140"><img src="http://bbs.aardio.com/static/image/common/forum.gif" alt=".Net框架(dotNet)" /></a>
+</div>
+<dl>
+<dt><a href="http://bbs.aardio.com/forum.php?mod=forumdisplay&fid=140">.Net框架(dotNet)</a></dt>
+<dd><em>主题: 15</em>, <em>帖数: 92</em></dd><dd>
+<a href="http://bbs.aardio.com/forum.php?mod=redirect&amp;tid=31089&amp;goto=lastpost#lastpost">最后发表: 2018-9-8 15:47</a>
+</dd>
+</dl>
+</td>
+<td class="fl_g" width="24.9%">
+<div class="fl_icn_g">
+<a href="http://bbs.aardio.com/forum.php?mod=forumdisplay&fid=167"><img src="http://bbs.aardio.com/static/image/common/forum.gif" alt="Java(Java)" /></a>
+</div>
+<dl>
+<dt><a href="http://bbs.aardio.com/forum.php?mod=forumdisplay&fid=167">Java(Java)</a></dt>
+<dd><em>主题: 10</em>, <em>帖数: 38</em></dd><dd>
+<a href="http://bbs.aardio.com/forum.php?mod=redirect&amp;tid=22541&amp;goto=lastpost#lastpost">最后发表: 2018-6-14 15:18</a>
+</dd>
+</dl>
+</td>
+<td class="fl_g" width="24.9%">
+<div class="fl_icn_g">
+<a href="http://bbs.aardio.com/forum.php?mod=forumdisplay&fid=123"><img src="http://bbs.aardio.com/static/image/common/forum.gif" alt="消息队列(zeromq,protobuf)" /></a>
+</div>
+<dl>
+<dt><a href="http://bbs.aardio.com/forum.php?mod=forumdisplay&fid=123">消息队列(zeromq,protobuf)</a></dt>
+<dd><em>主题: 10</em>, <em>帖数: 86</em></dd><dd>
+<a href="http://bbs.aardio.com/forum.php?mod=redirect&amp;tid=7626&amp;goto=lastpost#lastpost">最后发表: 2017-11-20 21:31</a>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="fl_row">
+<td class="fl_g" width="24.9%">
+<div class="fl_icn_g">
+<a href="http://bbs.aardio.com/forum.php?mod=forumdisplay&fid=135"><img src="http://bbs.aardio.com/static/image/common/forum.gif" alt="Flash控件(com.flash)" /></a>
+</div>
+<dl>
+<dt><a href="http://bbs.aardio.com/forum.php?mod=forumdisplay&fid=135">Flash控件(com.flash)</a></dt>
+<dd><em>主题: 18</em>, <em>帖数: 130</em></dd><dd>
+<a href="http://bbs.aardio.com/forum.php?mod=redirect&amp;tid=31034&amp;goto=lastpost#lastpost">最后发表: 2018-7-30 22:29</a>
+</dd>
+</dl>
+</td>
+<td class="fl_g" width="24.9%">
+<div class="fl_icn_g">
+<a href="http://bbs.aardio.com/forum.php?mod=forumdisplay&fid=166"><img src="http://bbs.aardio.com/static/image/common/forum.gif" alt="Python(py,py2,py3)" /></a>
+</div>
+<dl>
+<dt><a href="http://bbs.aardio.com/forum.php?mod=forumdisplay&fid=166">Python(py,py2,py3)</a></dt>
+<dd><em>主题: 20</em>, <em>帖数: 95</em></dd><dd>
+<a href="http://bbs.aardio.com/forum.php?mod=redirect&amp;tid=31031&amp;goto=lastpost#lastpost">最后发表: 2018-7-27 22:46</a>
+</dd>
+</dl>
+</td>
+<td width="24.9%">&nbsp;</td><td width="24.9%">&nbsp;</td></tr>
+</table>
+</div>
+</div>
+</div>
+
+<div class="wp mtn">
+<!--[diy=diy3]--><div id="diy3" class="area"></div><!--[/diy]-->
+</div>
+
+
+</div>
+
+</div>
+
+<script>fixed_top_nv();</script>	</div>
+<div id="ft" class="wp cl">
+<div id="flk" class="y">
+<p>
+<a href="http://bbs.aardio.com/forum.php?mobile=yes" >手机版</a><span class="pipe">|</span><a href="http://bbs.aardio.com/" >未经许可严禁引用或转载本站文章</a><span class="pipe">|</span><a href="mailto:jacen.he@aardio.com" >站长邮箱</a><span class="pipe">|</span><a href="http://www.aardio.com/" title="aardio官网" >aardio.com</a><span class="pipe">|</span><strong><a href="http://bbs.aardio.com/" target="_blank">aardio官方社区</a></strong>
+( <a href="http://www.miitbeian.gov.cn/" target="_blank">皖ICP备09012014号</a> )</p>
+<p class="xs0">
+GMT+8, 2019-4-12 10:45<span id="debuginfo">
+, Processed in 0.031250 second(s), 5 queries
+.
+</span>
+</p>
+</div>
+<div id="frt">
+<p>Powered by <strong><a href="http://www.discuz.net" target="_blank">Discuz!</a></strong> <em>X3.4</em></p>
+<p class="xs0">&copy; 2001-2017 <a href="http://www.comsenz.com" target="_blank">Comsenz Inc.</a></p>
+</div></div>
+<script src="../../../home.php?mod=misc&amp;ac=sendmail&amp;rand=1555037106" type="text/javascript"></script>
+
+<div id="scrolltop">
+<span hidefocus="true"><a title="返回顶部" onclick="window.scrollTo('0','0')" class="scrolltopa" ><b>返回顶部</b></a></span>
+</div>
+<script type="text/javascript">_attachEvent(window, 'scroll', function () { showTopLink(); });checkBlind();</script>
+<script type="text/javascript">
+			if($('debuginfo')) {
+				$('debuginfo').innerHTML = '. This page is cached  at 10:45:06  .';
+			}
+			</script></body></html>

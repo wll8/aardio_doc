@@ -1,0 +1,28 @@
+# aardio集成开发环境 [>> 下载最新版本](http://bbs.aardio.com/portal.php?mod=view&aid=2) [>> 官方论坛](http://bbs.aardio.com)
+
+aardio 专用于桌面软件快速开发，下载压缩包仅 6.x MB, 绿色软件解压即用 - 开发本软件的主要目的为作者自用自娱自乐、当然也欢迎大家自由自愿免费使用， 无论个人或企业都可以免费使用本软件。
+
+# aardio编程语言 ( [www.aardio.com](http://www.aardio.com) )
+
+aardio是专用于桌面软件快速开发的新一代混合型编程语言 - 具有动态语言轻便、灵活的特性，而且又可以同时支持静态类型开发，象静态语言那样使用。aardio可以直接支持原生DLL，即使是外部EXE进程中的函数，也可以使用一句代码声明为普通的aardio函数对象( 原生call支持 )，aardio支持非常多的标准调用约定，例如 stdcall，cdecl，thiscall，fastcall，regparm(n) 等调用约定都可以支持。aardio虽然小，但支持的接口很丰富、可以支持com静态动态双接口，象VBS一样原生支持com对象。
+
+用一个简单的代码演示一下，下面的aardio代码定义了一个结构体： `<p style="font-family: &#x65B0;&#x5B8B;&#x4F53;">
+    <font color="#008000">//&#x5B9A;&#x4E49;&#x7C7B;&#x3000;&#x3000;
+    </font><font color="#0000ff">class</font><font color="#000000">&#xA0;POINT&#xA0;{&#x3000;&#x3000;
+    &#xA0;&#xA0;&#xA0;&#xA0;int&#xA0;x;&#xA0;int&#xA0;y;&#xA0;</font><font color="#008000">//&#x9759;&#x6001;&#x7C7B;&#x578B;&#xA0;&#xA0;&#x3000;&#x3000;
+    </font><font color="#000000">&#xA0;&#xA0;&#xA0;&#xA0;func&#xA0;=&#xA0;</font><font color="#0000ff">function</font><font color="#000000">(){&#x3000;&#x3000;
+    &#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</font><font color="#008000">//&#x52A8;&#x6001;&#x7C7B;&#x578B;&#x3000;&#x3000;
+    </font><font color="#000000">&#xA0;&#xA0;&#xA0;&#xA0;}&#x3000;&#x3000;
+    }</font></p>`
+
+这种全新的混合编程语言开创了一种全新的编程方式，也因为这种语言特性，aardio可以非常方便的嵌入各种第三方语言，目前aardio可以嵌入汇编机器码，C语言，Java，PHP，C#，Python，Javascript，VBScript......等等数量众多的第三方编程语言，方便的互调函数，并且这些调用第三方语言的功能模块都是使用aardio实现( 开放源码 )。
+
+aardio可以将硬盘目录，硬盘文件一键嵌入EXE文件，将全部程序包含所有资源生成独立的绿色EXE文件，aardio制作的程序大多不需要安装程序，也不需要释放DLL运行库，可以方便的制作免安装绿色软件。
+
+aardio支持多线程开发，复杂的多线程开发在aardio中变得非常简单，标准库也提供大量简化多线程开发的辅助支持库，为多线程软件开发带来很大的方便（请参考aardio范例 -> 多线程 ）。
+
+aardio的标准库基本使用纯aardio源码实现，并且全部开源，标准库提供了大量的简化编程的常用函数，涉及到软件开发的方方面面，极大的简化了桌面软件开发过程。
+
+# 软件界面快速开发
+
+aardio提供web.form支持库( 开源 )，可以方便的创建web窗体加载网页创建web风格的软件界面或实现嵌入浏览器应用，网页与aardio代码可以方便的交互调用， 另外，aardio提供了web.layout支持库，封装了轻量快速的界面引擎HTMLayout，可以使用传统的HTML，CSS技术，更加方便的实现漂亮的界面，而且运行，响应速度极快，开发工具、以及论坛中也提供了大量HTMLayout的范例，教程，以及很多大家分享的漂亮的界面源码。 使用aardio开发传统界面也非常的方便，aardio提供可视化开发工具，可以比较方便的的通过拖拉控件创建程序。使用标准库内置并开源的plus控件可以方便的实现控件九宫格贴图、透明贴图、仅仅通过拖拉设置就可以快速制作出漂亮的界面（参考plus控件教程）。
