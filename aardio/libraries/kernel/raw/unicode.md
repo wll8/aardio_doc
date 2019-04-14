@@ -8,11 +8,13 @@ API指的是使用UTF16编码字符足的API函数，例如WINAPI的Unicode版�
 
 aardio支持自动识别Unicode API并自动转换文本编码，一个最简单的例子：
 
-::User32.MessageBox(0,
+``` aau
+::User32.MessageBox(0,"消息","标题",0)
+```
 
 aardio自动做好了所有的事，我们在调用API时一切都被简化，下面讲一下规则：
 
-aardio在识别了一个Unicode AP函数时，在不声明API参数原型直接调用API时所有字符串参数在api-utf16 <--> aardio-utf8之间的双向自动转换（即视为ustring类型）。在声明参数的Unicode API中str,ustring类型被认为API需要一个UTF16编码的字符串aardio将会自动做双向转换，
+aardio在识别了一个Unicode AP函数时，在不声明API参数原型直接调用API时所有字符串参数在api-utf16 <--> aardio-utf8之间的双向自动转换（即视为ustring类型）。在声明参数的Unicode API中str,ustring类型被认为API需要一个UTF16编码的字符串aardio将会自动做双向转换，**但string类型仍然认为是一个二进制字符串不作转换。缓冲区（buffer）、指针（pointer）等类型也被认为是二进制数据不会自动做Unicode编码转换。**
 
 在非Unicode API函数中，ustring仍然被认为是显式声明的UTF16编码的字符串参数 - 然后会自动转换编码，string类型仍然被认为是二进制字符串，而str类型则被认为是一个多字节编码的字符串(ANSI或UTF8编码,以'\0'为终止符的C字符串）。
 

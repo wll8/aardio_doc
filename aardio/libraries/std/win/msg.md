@@ -1,36 +1,14 @@
+# Windows消息大全
+
 消息，就是指Windows发出的一个通知，告诉应用程序某个事情发生了。例如，单击鼠标、改变窗口尺寸、按下键盘上的一个键都会使Windows发送一个消息给应用程序。消息本身是作为一个记录传递给应用程序的，这个记录中包含了消息的类型以及其他信息。例如，对于单击鼠标所产生的消息来说，这个记录中包含了单击鼠标时的坐标。
 
-
-|
-
-**消息范围**  |
-
-**表示**  |
-|
-
-0 ~ WM_USER–1  |
-
-操作系统保留的消息。  |
-|
-
-**WM_USER**~ 0x7FFF  |
-
-私有窗口级别的自定义消息。  |
-|
-
-**WM_APP**~ 0xBFFF  |
-
-应用程序级别的自定义消息。其中0xAAAA/*_WM_AARDIO_RESERVED*/ 至 0xBFFF 为aardio标准库保留值请勿使用。  |
-|
-
-0xC000 ~ 0xFFFF  |
-
-::RegisterWindowMessage函数定义一个新的窗口消息，该消息保证在整个系统范围内是唯一的。  |
-|
-
-0xFFFF ~  |
-
-操作系统保留的消息。  |
+消息范围 | 表示
+- | -
+0 ~ WM_USER–1 | 操作系统保留的消息。
+WM_USER ~ 0x7FFF | 私有窗口级别的自定义消息。
+WM_APP ~ 0xBFFF | 应用程序级别的自定义消息。其中0xAAAA/*_WM_AARDIO_RESERVED*/ 至 0xBFFF 为aardio标准库保留值请勿使用。
+0xC000 ~ 0xFFFF | ::RegisterWindowMessage函数定义一个新的窗口消息，该消息保证在整个系统范围内是唯一的。
+0xFFFF ~ | 操作系统保留的消息。
 
 
  对于一般的点按控件的用户操作，通过创建事件响应函数就可以处理了。
@@ -46,15 +24,26 @@
  对于主窗体：同样是在右键菜单中点击【创建窗口消息回调函数】，如下：
 
 
-|
-> winform.wndproc =  |
+``` aau
+winform.wndproc = function(hwnd,message,wParam,lParam){
+    select( message ) {
+        case 0x205/*_WM_RBUTTONUP*/{
+            //鼠标右键弹起,下面获取坐标
+            var x,y = win.getMessagePos(lParam);
 
+        }
+        else{
 
+        }
+    }
+    //无返回值则继续调用默认回调函数
+}
+```
 
 wparam 通常是一个与消息有关的常量值，也可能是窗口或控件的句柄。
 lparam 通常是一个指向内存中数据的32位指针。
-            根据不同的消息，他们有不同的意义，例如在鼠标右键弹起消息里，::LOWORD(lparam)取lparam的低位表示x坐标,
-            ::HIWORD(lparam)取出lparam的高位表示y坐标.
+根据不同的消息，他们有不同的意义，例如在鼠标右键弹起消息里，::LOWORD(lparam)取lparam的低位表示x坐标,
+::HIWORD(lparam)取出lparam的高位表示y坐标.
 
 hwnd 32位的窗口句柄。 一般我们不用管这个参数。
 message 用于区别其他消息的常量值，这些常量值通常以下划线开头，或_WM_开头
@@ -687,19 +676,56 @@ _LBN_SELCHANGE选择了另一项
 _LBN_SETFOCUS列表框获得输入焦点
 
 
-|
->  |
+``` aau
+/*
+了解消息可以做很多有趣的事，例如我们可以不要标题栏（在窗体属性中将text属性清空），不要边框。
+自已用控件来模拟windows的标题栏以及边框，可以用图片控件做出漂亮的无边框窗体。在控件的的消息回调中拦截 _WM_LBUTTONDOWN
+*/
+import win;
 
- <a name="message_api">
+//一.模拟标题栏( 也可以直接使用封装好的 winform.hitCaption() 函数
+::User32.PostMessage(winform.hwnd, 0xA1/*_WM_NCLBUTTONDOWN*/ , 0x2/*_HTCAPTION*/, 0)
+
+//二、模拟边框（也可以使用标准 库中封装好的 win.ui.resizeBorder  ）
+
+//上下左右8个方向调整窗体大小
+::User32.SendMessage(winform.hwnd, 0xA1/*_WM_NCLBUTTONDOWN*/, 0xC/*_HTTOP*/, 0) //上边
+::User32.SendMessage(winform.hwnd, 0xA1/*_WM_NCLBUTTONDOWN*/, 0xF/*_HTBOTTOM*/, 0) //下边
+::User32.SendMessage(winform.hwnd, 0xA1/*_WM_NCLBUTTONDOWN*/, 0xA/*_HTLEFT*/, 0 );//左边
+::User32.SendMessage(winform.hwnd, 0xA1/*_WM_NCLBUTTONDOWN*/, 0xB/*_HTRIGHT*/, 0);//右边
+::User32.SendMessage(winform.hwnd, 0xA1/*_WM_NCLBUTTONDOWN*/, 0xD/*_HTTOPLEFT*/, 0);//左上角
+::User32.SendMessage(winform.hwnd, 0xA1/*_WM_NCLBUTTONDOWN*/, 0x10/*_HTBOTTOMLEFT*/, 0 );//左下角
+::User32.SendMessage(winform.hwnd, 0xA1/*_WM_NCLBUTTONDOWN*/, 0xE/*_HTTOPRIGHT*/, 0 );//右上角
+::User32.SendMessage(winform.hwnd, 0xA1/*_WM_NCLBUTTONDOWN*/, 0x11/*_HTBOTTOMRIGHT*/, 0);//右下角
+
+//三.最大化最小化窗体(和上面调用方法一样,只有sendmessage方法参数不一样)
+
+//1.模拟窗体最小化
+::User32.PostMessage(winform.hwnd, 0x112/*_WM_SYSCOMMAND*/,0xF020/*_SC_MINIMIZE*/, 0);
+
+//2.模拟窗体最大化
+::User32.PostMessage(winform.hwnd, 0x112/*_WM_SYSCOMMAND*/, 0xF030/*_SC_MAXIMIZE*/,0);
+
+//3.模拟窗体最大化后还原
+::User32.PostMessage(winform.hwnd, 0x112/*_WM_SYSCOMMAND*/, 0xF120/*_SC_RESTORE*/, 0);
+```
 
 使用 import win; 语句导入windows支持库,在这个库中定义了下面的消息API函数. 注意在 aardio 中并不是一定要先声明API才能调用，也可以直接调用，例如前面的代码中都是直接调用API。
 
-::PostMessage = ::User32.api(
+``` aau
+::PostMessage = ::User32.api("PostMessageA","int(addr hWnd,INT msg,int wParam,int lParam)")
+::PostThreadMessage = ::User32.api("PostThreadMessageA","int(addr idThread,INT msg,int wParam,int lParam)");
+::SendMessage = ::User32.api("SendMessageA","int(addr hWnd,INT msg,pointer wParam,pointer lParam)")
+::SendMessageInt = ::User32.api("SendMessageA","int(addr hWnd,INT msg,int wParam,int lParam)")
+::SendMessageByInt = ::User32.api("SendMessageA","int(addr hWnd,INT msg,int &wParam,int &lParam)")
+::SendMessageByString = ::User32.api("SendMessageA","int(addr,INT,int,string &lParam)")
+::SendMessageByStr = ::User32.api("SendMessageA","int(addr,INT,int,str &lParam)")
+::SendMessageByStruct = ::User32.api("SendMessageA","int(addr,INT,int,struct &lParam)")
+::SendMessageTimeout = ::User32.api("SendMessageTimeoutA","int(addr hwnd,INT msg,pointer wParam,pointer lParam,INT flags,INT timeout,int & resultult)")
+```
 
-PostMessage系列函数只负责将消息放到消息队列中然后直接返回,消息由win.loopMessage()处理. 
+PostMessage系列函数只负责将消息放到消息队列中然后直接返回,消息由win.loopMessage()处理.
 工作线程如果向UI线程消息队列快速发送大量的消息,导至消息队列大小超过系统限制,会导致后续消息丢失,无法正常响应用户操作.
-
-SendMessage系列函数调用窗口回调函数,并等待直到获取返回代码,消息不会放入队列中,即不会被 win.loopMessage() 处理 
+SendMessage系列函数调用窗口回调函数,并等待直到获取返回代码,消息不会放入队列中,即不会被 win.loopMessage() 处理
 在多线程中，如果多个线程都频繁的调用SendMessage系列函数,因为该函数会在相同的GUI线程中阻塞处理, 这会导致多线程实际上失去并发执行的效果.
 
- </a>

@@ -1,7 +1,7 @@
 # 不声明直接调用API函数
 
 
- 示例： 
+ 示例：
 
 ``` aau
 ::User32.MessageBox(0,"测试","标题",0)
@@ -14,26 +14,33 @@
 
 
 1、调用约定在加载DLL的参数中指定,支持cdecl不定个数参数,有很多API根据不同的用法可以传入不同类型的参数，
-如果我们在aardio中不是先写一个API声明，而是直接去调用API，这时候就可以根据需要更灵活的改变参数类型。一般建议不要先声明API再去调用 - 直接调用更方便也更节省资源 (除非有特殊的数据类型必须通过声明API来指定)。
+如果我们在aardio中不是先写一个API声明，而是直接去调用API，这时候就可以根据需要更灵活的改变参数类型。`一般建议不要先声明API再去调用 - 直接调用更方便也更节省资源` (除非有特殊的数据类型必须通过声明API来指定)。
 
 
 2、null参数不可省略
 
 
 3、数值参数一律处理为32位int整型，32位整数类型，小于32位的整数、枚举类型、8位或32位bool值都跟int 32位数值兼容，可以直接写在参数里,示例：
+
+``` txt
 32位整型以及小于32位的整型参数都可以直接传入aardio数值。
- 例如C语言API声明为：void setNumber( short n ) 
+ 例如C语言API声明为：void setNumber( short n )
 
  在aardio里如下调用就可以
 dll.setNumber( 123 )
+```
 
 
 4、64位整数（C语言中的long long)可以math.size64对象表示，或者用两个数值参数表示一个64位整数值参数，其中第一个参数表示低32位数值,第二个参数表示高32位数值（一般可以直接写0）。
 
 
 5、对于任何数值类型的指针（输出参数）一律使用结构体表示，
- 例如C语言API声明为：void getNumber( short *n ) 在aardio里如下调用就可以 var n = {word value}
+ 例如C语言API声明为：void getNumber( short *n ) 在aardio里如下调用就可以
+
+``` aau
+var n = {word value}
 dll.getNumber( n )
+```
 
 6、API函数中的数组指针，在aardio中可以使用结构体指针替代，例如C语言中的  int data[4]; 在aardio中写为 {int data[4];} 如果是字节数组指针也可以使用raw.buffer()函数创建的字节数组替代。
 
@@ -64,19 +71,14 @@ dll.getNumber( n )
 
 所有可用的[API尾标]如下（函数名的最后一个特定字符是尾标）：
 
-dll.ApiNameW() 切换到Unicode版本，字符串UTF8-UTF16双向转换
-
+?> dll.ApiNameW() 切换到Unicode版本，字符串UTF8-UTF16双向转换
 dll.ApiNameA() 切换到ANSI版本,字符串不作任何转换
-
 dll.ApiNameL() 返回值为64位LONG类型
-
 dll.ApiNameP() 返回值为指针类型
-
 dll.ApiNameD() 返回值为double浮点数
-
 dll.ApiNameF() 返回值为float浮点数
-
 dll.ApiNameB() 返回值为C++中的8位bool类型
+
  对于已存在W尾标的API函数，可在调用API时使用其他尾标，
  并且仍然可以正确检测并切换到API函数的Unicode版本。
 
@@ -85,21 +87,21 @@ dll.ApiNameB() 返回值为C++中的8位bool类型
 ### 四、不声明直接调用API如何使用字符串
 
 
-1、字符串一般直接转换为字符串指针，buffer类型字节数组也可以作为字符串指针使用，如果API需要向字符串指向的内存中写入数据，那么必须使用raw.buffer()函数创建定长的字节数组。普通的aardio字符串指向的内存是禁止写入的（aardio中修改普通字符串会返回新的字符串对象，而不是在原内存上修改数据）
+* 1、字符串一般直接转换为字符串指针，buffer类型字节数组也可以作为字符串指针使用，如果API需要向字符串指向的内存中写入数据，那么必须使用raw.buffer()函数创建定长的字节数组。普通的aardio字符串指向的内存是禁止写入的（aardio中修改普通字符串会返回新的字符串对象，而不是在原内存上修改数据）
 
 
-2、对于非Unicode API字符串直接输入原始的数据（对于文本就是UTF8编码），对于声明为Unicode版本的API，字符串会被强制转换为Unicode(UTF16)，但buffer类型的参数仍然会以二进制方式使用原始数据与API交互（不会做文本编码转换）
+* 2、对于非Unicode API字符串直接输入原始的数据（对于文本就是UTF8编码），对于声明为Unicode版本的API，字符串会被强制转换为Unicode(UTF16)，但buffer类型的参数仍然会以二进制方式使用原始数据与API交互（不会做文本编码转换）
 
-10.1、可以在 raw.loadDll()加载DLL时在调用约定中添加",unicode"声明一个DLL默认使用Unicode API，
+  * 10.1、可以在 raw.loadDll()加载DLL时在调用约定中添加",unicode"声明一个DLL默认使用Unicode API，
 
-10.2、也可以在函数名后添加尾标"W"声明一个Unicode API, 即使真实的API函数名后面并没有"W"尾标，你仍然可以添加"W"尾标调用API。aardio在找不到该API函数时，会移除"W"尾标，并且认为该API函数是一个Unicode API，注意"W"必须大写并紧跟在小写字母后面。
+  * 10.2、也可以在函数名后添加尾标"W"声明一个Unicode API, 即使真实的API函数名后面并没有"W"尾标，你仍然可以添加"W"尾标调用API。aardio在找不到该API函数时，会移除"W"尾标，并且认为该API函数是一个Unicode API，注意"W"必须大写并紧跟在小写字母后面。
 
-10.3、直接调用API时，如果目标API函数并不存在，而是存在加"W"尾标的Unicode API,aardio将会自动切换到Unicode API，并在调用函数时，自动将aardio的UTF8编码转换为API所需要的UTF16编码。
+  * 10.3、直接调用API时，如果目标API函数并不存在，而是存在加"W"尾标的Unicode API,aardio将会自动切换到Unicode API，并在调用函数时，自动将aardio的UTF8编码转换为API所需要的UTF16编码。
 
-10.4、反之，在API函数名后也可以显式的添加'A'尾标强制声明此API是一个ANSI版本的函数（对字符串参数不使用任何Unicode转换，即使加载DLL时在调用约定中声明了默认以unicode方式调用），规则同上 - 也即真实的API函数名后面有没有'A'尾标并不重要，在aardio中都可以加上'A'尾标。
+  * 10.4、反之，在API函数名后也可以显式的添加'A'尾标强制声明此API是一个ANSI版本的函数（对字符串参数不使用任何Unicode转换，即使加载DLL时在调用约定中声明了默认以unicode方式调用），规则同上 - 也即真实的API函数名后面有没有'A'尾标并不重要，在aardio中都可以加上'A'尾标。
 
 
-3、一些API在接收字符串、字节数组等参数时，通常下一个参数需要指定内存长度，
+* 3、一些API在接收字符串、字节数组等参数时，通常下一个参数需要指定内存长度，
 aardio中用#操作符取字符串、缓冲区的长度时，返回的都是字节长度，一些API可能需要你传入字符个数，
 发果是Unicode版本的API一个字符为两个字节，对于一个UTF8字符串应当事用string.len()函数得到真正的字符长度,
 而Unicode字符串则用#取到字节长度后乘以2即可。

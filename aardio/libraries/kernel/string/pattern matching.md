@@ -2,9 +2,9 @@
 
  请参考：[模式匹配语法](libraries/kernel/string/pattern%20syntax)
 
-## **查找字符串的**
+## 查找字符串的
 
-i,j = string.find(str,"模式串" [,pos]);
+`i,j = string.find(str,"模式串" [,pos]);`
 
 使用模式匹配查找字符串并返回起始位置(i),结束位置(j);
 第三个参数pos指定搜索开始的位置，这个参数可以省略(使用默认值1);
@@ -16,72 +16,84 @@ pos如果为负数，则从右侧倒数计数(-1表示字符串最后一个字�
 如果需要禁用模式语法，请在模式串开始添加@字符。或参考：[其他查找函数](libraries/kernel/string/search)
 
 
+``` aau
 io.open(); //打开控制台窗口
-
 i,j = string.find("abc456d" ,"c\d+");
 
 if( i ) //如果找到i为大于0的数值
-io.print("在 'abc456d' 中找到 c\d+" ，"从" + i + "到" + j);
-
-if(not string.find("abcd" ,"不可能") ) 
-io.print("没有从 'abcd' 中找到 '不可能' ");
+   io.print("在 'abc456d' 中找到 c\d+" ，"从" + i + "到" + j);
+if(not string.find("abcd" ,"不可能") )
+    io.print("没有从 'abcd' 中找到 '不可能' ");
+```
 
 ## 替换字符串
 
-**str = string.replace (str, pattern, ** **repl** **[, n])**
+`str = string.replace (str, pattern, ** **repl** **[, n])`
 
 参数分别为(目标字符串,查找模式字符串,替换字符串,替换次数)。
 最后一个可选参数指定替换的次数,如果不指定则替换所有的找到的字符串。
 
 如果需要禁用模式语法，请在模式串开始添加@字符。
+
+``` aau
 io.open(); //打开控制台窗口
 
-//  在模式匹配中 .圆点标记匹配任意字符
+// 在模式匹配中 .圆点标记匹配任意字符
 str = string.replace("abcd",".","k");
 io.print(str); //输出kkkk
 
 str = string.replace("abcd",".","k",1);
 io.print(str); //输出kbcd
-pattern参数(查找模式字符串)可以使用所有模式匹配语法。 
+```
+
+pattern参数(查找模式字符串)可以使用所有模式匹配语法。
 **repl** 参数则为普通字符串,但是可以用\1,\2,\3..........等表示模式匹配后的捕获分组(即模式串中一个括号中的模式匹配的目标字符串);
- 看下面的示例: 
+ 看下面的示例:
 
-
+``` aau
 io.open(); //打开控制台窗口
 
 //在模式匹配中 .圆点标记匹配任意字符。
-str = string.replace ("abcd","(.)","\1k");
+str = string.replace("abcd","(.)","\1k");
 
 io.print (str); //结果是akbkckdk
+```
 
-## **模式匹配-分组捕获(capture) **
+## 模式匹配-分组捕获(capture)
 
-### **1、在string.find中使用分组捕获**
+### 1、在string.find中使用分组捕获
 
 string.find会将所有的 **分组捕获**增加到返回值队列中。
 我们用一个示例来解释一下.
 
 下面是一个简单的例子，除了括号分组没有使用其他的模式语法。
-i,j,v,v2 = string.find ( "abcd", "(ab)(cd)" );
+
+``` aau
+i,j,v,v2 = string.find ( "abcd" , "(ab)(cd)" );
 
 io.open();
-io.print (v,v2 );
+io.print (v,v2); //结果为v等于"ab" v2等于"cd"
+```
+
  再看一个类似的例子，使用了模式语法。
 
 
+``` aau
 io.open();
 
-pair = 
+pair = "name = value"
 
+//增加了两个返回值name,value,分别对应查找模式串中的两个括号组成的匹配分组
+i, j, n, v = string.find(pair, "(\a+)\s*=\s*(\a+)")
+io.print(i,j,n,v)//> 显示 name value
+```
 
-i, j, n, v = (pair, )
-(i,j,n,v )
-
-### **2、向前引用**
+### 2、向前引用
 
 我们可以在模式中使用向前引用已经找到的捕获分组，'\d'(d代表1-9的数字) 表示第d个捕获的拷贝。
 
 
+``` aau
 //假定有一个字符串
 str = /* a = "test = 'abc'" */
 str2 = /* a = 'test = "abc"' */
@@ -108,67 +120,82 @@ io.print( substr )//>显示 test = 'abc'
 io.print( quote )//>显示双引号
 io.print( substr2 )//>显示 test = "abc"
 io.print( quote2 )//>显示单引号
+```
 
-### **3、在string.** **replace** **中使用分组捕获**
+### 3、在string.replace中使用分组捕获
 
-**str = string.** **replace** **(str, pattern, repl [, n])**
+`str = string.replace (str, pattern, repl [, n])`
 
 参数分别为(目标字符串,查找模式串,替换字符串,替换次数)。
 在模找模式串 **pattern**中可以使用括号分组，在替换串参数 **repl**中可以用\d(d为1到9的数字)引用分组捕获。
+
+``` aau
 io.open();
 
 //复制字符串中的每一个字符.
-str = string.replace("hello","(.)","\1\1"); 
+str = string.replace("hello","(.)","\1\1");
 io.print(str); //显示hheelllloo
 
 //下面代码互换相邻的字符:
 str = string.replace("hello", "(.)(.)", "\2\1")
 io.print(str);//显示ehllo
+```
 
-### **4、在string.** **replace** **中使用函数处理分组捕获**
+### 在string.replace中使用函数处理分组捕获
 
-**str = string.** **replace** **(str, pattern, func [, n])**string.replace参数的第三个参数也可以是一个函数。
+`str = string.replace (str, pattern, func [, n])`
+
+string.replace参数的第三个参数也可以是一个函数。
 string.replace会将所有分组捕获作为func的参数,并且调用func函数,并且用func函数的返回值作为替换串。
 
 可以在模式匹配中直接使用函数,是模式匹配中非常有用的一个功能。
-io.open();
 
+``` aau
+io.open();
 //如果两个捕获都是数字则相加，否则将位置前后掉换
-function captureProc(a,b) { 
-io.print(owner,a,b); //owner显示原始定符串
-if(tonumber(a) and tonumber(b) ) 
-return a + b;//如果两个捕获都是数字则相加
-else
-return b ++ a;//否则将位置前后掉换
+function captureProc(a,b) {
+    io.print(owner,a,b); //owner显示原始定符串
+    if(tonumber(a) and tonumber(b) )
+        return a + b;//如果两个捕获都是数字则相加
+    else
+        return b ++ a;//否则将位置前后掉换
 }
+
 //复制字符串中的每一个字符.
 str = string.replace("abcdef23","(.)(.)",captureProc);
 io.print(str); //显示badcfe5
+```
 
-## **string.match 模式匹配**
+## string.match 模式匹配
 
-string.match(**str, pattern, pos**)
+`string.match(str, pattern, pos)`
 
 第一个参数指定目标字符串，每二个参数指定查找模式串。第三个参数可选指定开始位置
 这个函数与string.find很象。但不会返回匹配的开始位置与结束位置。而仅仅是返回找到的字符串。
 如果在模式串中用圆括号指定的匹配分组,则返回值有多个分别对应各个匹配分组的捕获结果。
 分组可以相互嵌套，捕获结果返回的顺序对应模式串中匹配分组的左圆括号出现的前后顺序。
 如果你希望第一个返回值是匹配结果的完整字符串,那么请将整个模式串包含在一对圆括号内。
-var v,v2   = string.match("abcd",   "(ab)(cd)");
+
+``` aau
+var v,v2 = string.match("abcd", "(ab)(cd)");
 
 io.open( );
 io.print(v,v2); //>显示v等于"ab" v2等于"cd"
+```
 
 如果不显示的用括号指定捕获，函数将捕获整个匹配模式。
+
+``` aau
 //\d表示数字 \d+表示最长匹配多个数字
 var v = string.match("abcd1234", "\d+");
 
 io.open();
 io.print(v); //>显示v等于"1234"
+```
 
-## **string.gmatch   全局模式匹配**
+## string.gmatch   全局模式匹配
 
-func = string.gmatch(**str, pattern**)
+`func = string.gmatch(str, pattern)`
 
 string.gmatch()创建并返回一个迭代器，可用于for语句中迭代的进行全局查找。
 迭代器每执行一次返回一个找到的字符串，如果在模式串中用圆括号指定的匹配分组,
@@ -176,12 +203,14 @@ string.gmatch()创建并返回一个迭代器，可用于for语句中迭代的�
 的顺序对应模式串中匹配分组的左圆括号出现的前后顺序。如果你希望第一个返回值
 是匹配结果的完整字符串,那么请将整个模式串包含在一对圆括号内。
 
+``` aau
 io.open();
 
 //for后面的变量对应查找模式串中的括号分组(有几对括号就有几个返回值)
-for str,int in string.gmatch( "abcd=1234 xyz=999","(\a+)=(\d+)")   { 
-io.print(str,int);
+for str,int in string.gmatch( "abcd=1234 xyz=999","(\a+)=(\d+)") {
+   io.print(str,int);
 }
+```
 
 string.gmatch函数比较适合用于泛型for循环。他可以遍历一个字符串内所有匹配模式的子串。
 调用string.gmatch函数的时候，如果不显示的指定捕获，函数将捕获整个匹配模式。
@@ -189,6 +218,7 @@ string.gmatch函数比较适合用于泛型for循环。他可以遍历一个字�
 实际上string.gmatch的返回值是一个迭代器函数,每调用这个函数一次就会向后查找一个匹配直到查找失败。
 上面在泛型for中执行string.gmatch的过程实际上可以理解成这样：
 
+``` aau
 io.open();
 
 f = string.gmatch( "abcd=1234 xyz=999","(\a+)=(\d+)");
@@ -198,6 +228,7 @@ io.print(str,int);
 
 str,int = f();
 io.print(str,int);
+```
 
 ## 范例：查找网页源代码中的超链接
 

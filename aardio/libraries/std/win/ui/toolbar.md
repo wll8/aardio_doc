@@ -71,19 +71,11 @@ tb.add( "新建", function () {
 
 **1、属性说明：**
 
->
+`tb.flat` 表示工具条是否扁平，默认为 true（该属性仅能在调用 create 方法之前定义）
 
-### tb.flat
+`tb.showLabel` 表示工具条按钮上是否显示文字，默认为 true
 
->> 表示工具条是否扁平，默认为 true（该属性仅能在调用 create 方法之前定义）
-
-### tb.showLabel
-
->> 表示工具条按钮上是否显示文字，默认为 true
-
-### tb.imageList
-
->> 表示工具条按钮上图片的来源（该属性仅能在调用 create 方法之后定义）
+`tb.imageList` 表示工具条按钮上图片的来源（该属性仅能在调用 create 方法之后定义）
 
 ## 综合示例
 

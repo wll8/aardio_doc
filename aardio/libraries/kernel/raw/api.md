@@ -1,16 +1,17 @@
-# raw库 声明API函数
+# raw库声明API函数
 
  使用raw库函数可以支持[静态类型](libraries/kernel/raw/datatype) 编程、导入外部API函数。
 
 ## 加载dll模块
 
-dll := raw.loadDll( path | strMemoryDll );
+`dll := raw.loadDll( path | strMemoryDll );`
 
 raw.loadDll从路径path或内存数据strMemoryDll中加载dll模块，
 然后我们可以使用 dllmodule.api 函数声明我们需要用到的api函数。
 
 参考：[API数据类型](libraries/kernel/raw/datatype)
 
+``` aau
 //使用内存DLL的示例
 
 dllmodule := raw.loadDll($"d:\\hardware.dll");
@@ -18,6 +19,7 @@ testapi := dllmodule.api("getbios", "s()" );
 
 io.open();
 ioprint( testapi( ));
+```
 
 
 注意:如果DLL厂商仅提供一个版本的DLL，一般是32位的DLL，在aardio可以直接加载，
@@ -56,10 +58,9 @@ dll.api( 函数名|函数序号,函数原型,调用约定="stdcall",this指针=n
 
  定义了一个函数原型,有一个int类型的参数a,一个int类型的参数b,返回值为int类型.
 
- 请参考:
-[静态数据类型](libraries/kernel/raw/datatype)
+ 请参考: [静态数据类型](libraries/kernel/raw/datatype)
 
-调用约定可以不指定，默认值为"stdcall"，可选值为"cdecl","thiscall"，"fastcall"，"regparm(n)"等， 可以在调用约定后面紧跟一个逗号以及目标DLL的开发平台，可选值为",borland" ",microsoft" ,microsoft是默认选项可以省略，使用delphi编写的DLL时，"stdcall","cdecl"等调用约定不需要指定开发平台。 
+调用约定可以不指定，默认值为"stdcall"，可选值为"cdecl","thiscall"，"fastcall"，"regparm(n)"等， 可以在调用约定后面紧跟一个逗号以及目标DLL的开发平台，可选值为"`,borland`" "`,microsoft`" ,microsoft是默认选项可以省略，使用delphi编写的DLL时，"stdcall","cdecl"等调用约定不需要指定开发平台。
 
 fastcall,regparm(n)调用约定( 也就是寄存器传参方式 )详解:
 
@@ -90,6 +91,7 @@ C++对象调用约定，可在声明API时增加一个参数指定this指针,如
 
 
 
+``` aau
 //声明API调用示例
 //=====================================================
 //导入DLL
@@ -101,8 +103,9 @@ messageBox := User32.api( "MessageBoxW", " void ( int hWnd, ustring lpText,ustri
 
 //使用API函数
 messageBox( 0, "这是一个测试对话框", "对话框标题", 0x00001000 )
+```
 
-### 三、声明内部函数
+## 声明内部函数
 
 ``` aau
 raw.main = raw.loadDll();
@@ -111,7 +114,7 @@ func = raw.main.api( 内部指针地址,函数原型 )
 
 如果调用raw.loadDll()时未使用任何参数，则这里的第一个参数应当是一个内部函数指针.
 
-一个有趣的示例(危险操作,请勿模仿):
+一个有趣的示例(`危险操作,请勿模仿`):
 
 ``` aau
 import win;

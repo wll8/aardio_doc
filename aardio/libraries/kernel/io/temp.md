@@ -6,11 +6,13 @@
 
 使用io.open打开文件时,如果文件路径是一个空字符串,则创建临时文件对象,例如:
 
+``` aau
 tempfile = io.open("") //文件名为空则创建可读写的临时文件
+```
 
 请参考: [io.open](libraries/kernel/io/io#open)
 
-## **io.tmpname**
+## io.tmpname
 
 **1、函数原型：**
 

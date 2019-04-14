@@ -40,6 +40,26 @@ func_call = raw.remoteApi(  进程ID|进程句柄,函数原型
 
 **5、调用示例:**
 
+``` aau
+import winex;
+
+//遍历桌面所有窗口
+for hwnd,title,tid,pid in winex.each() {
+    if(title!="" && win.isVisible(hwnd) /*不然下面的看不到了*/){
+
+         //在目标进程内声明一个函数，加载user.dll，并获取user.dll中的MessageBoxA函数指针
+         var messageBox_call = raw.remoteApi(pid
+             ,"void ( int hWnd, ustring text,ustring caption ,INT uType )"
+             ,"User32.dll","MessageBoxW");//DLL名以及函数名也可以更换为一个函数地址
+
+         //象普通函数一样使用
+         messageBox_call(0,"这是一个外部进程！在此进程加载了User32.dll，并获取执行了MessageBoxA函数指针","aardio call" ,0)
+
+         break ;
+    }
+}
+```
+
 ## 使用process库创建CALL
 
 使用process库创建的进程对象拥有更高的权限,请参考:[prcs.remoteApi](libraries/std/process/process#remoteApi)

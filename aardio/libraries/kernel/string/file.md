@@ -4,9 +4,9 @@
 
  参考：[io库文件读写函数](libraries/kernel/io/io) [检测文件路径](libraries/kernel/io/path#exist)
 
-## **读文件**
+## 读文件
 
-string.load(path,filetype="RES",dllhandle = null )
+`string.load(path,filetype="RES",dllhandle = null )`
 
 string.load有三个参数，第一个参数为文件路径。
 文件路径可以是普通磁盘文件的路径，也可以是资源文件的资源名字（默认的：aardio创建的exe，资源名字就是文件在硬盘上的相对路径）。
@@ -21,7 +21,7 @@ string.load有三个参数，第一个参数为文件路径。
 
 ## 写文件
 
-string.save(path,str,append=false)
+`string.save(path,str,append=false)`
 
 string.save将字符串str保存到path指定的磁盘文件，如果增加append参数（值 为true）则追加到文件尾。
 

@@ -81,12 +81,15 @@ com.ShowHelp( com对象  )
 查看帮助
 
 **2、函数示例：**
+
+``` aau
 import com; //引用com库
 
-conn =   com.CreateObject("ADODB.Connection"); //创建数据库连接
+conn = com.CreateObject("ADODB.Connection"); //创建数据库连接
 assert(conn,"创建数据库连接时遇到错误");
 
-com.ShowHelp(conn);   //打开ADO帮助文档
+com.ShowHelp(conn); //打开ADO帮助文档
+```
 
 ## com.DumpTypeInfo
 
@@ -103,18 +106,21 @@ com.DumpTypeInfo( com对象  )
 
 **2、函数示例：**
 
+``` aau
 import com; //引用com库
 
 xml = com.CreateObject("MSXML.DOMDocument")
 com.DumpTypeInfo(xml) //输出xml对象的类型信息、成员属性、成员方法列表
+```
 
 ### 访问com对象属性
 
-在com对象后面加对象成员符(圆点.)，然后写属性名称，例：
+``` aau
 import com; //引用com库
 
-conn   = com.CreateObject("ADODB.Connection"); //创建数据库连接
-conn.ConnectionString =   "Provider=Microsoft.Jet.OLEDB.4.0;Data   Source=test.mdb"
+conn = com.CreateObject("ADODB.Connection"); //创建数据库连接
+conn.ConnectionString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=test.mdb"
+```
 
 ## 数据类型
 
@@ -124,30 +130,30 @@ conn.ConnectionString =   "Provider=Microsoft.Jet.OLEDB.4.0;Data   Source=test.m
 
 ......此处的代码请参考web库源代码
 
-post = function(url,postdata,headers='\r\nContent-Type: application/x-www-form-urlencoded',target="_self"){ 
+``` aau
+post = function(url,postdata,headers='\r\nContent-Type: application/x-www-form-urlencoded',target="_self"){
 
-this._browser.Navigate(url,0,target,{ postdata /*将字符串转换为字节数组*/ },headers)
+    this._browser.Navigate(url,0,target,{ postdata/*将字符串转换为字节数组*/ } ,headers)
 
 }
+```
 
 注意红色部分代码，一个字符串被转换为字节数组。
 
 ## com对象 - 读写属性、调用成员函数
 
-
- 首先看一下简单的示例：
+``` aau
 import com; //引用com库
 
 //创建com对象
-conn   = com.CreateObject("ADODB.Connection");
+conn = com.CreateObject("ADODB.Connection");
 
 //读写com对象成员属性
-conn.ConnectionString =   "Provider=Microsoft.Jet.OLEDB.4.0;Data   Source=test.mdb"
+conn.ConnectionString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=test.mdb"
 
-
-  //调用com对象成员函数
-  
+//调用com对象成员函数
 conn.Open();
+```
 
 需要注意com对象的同一个成员属性名字，即可以作为一个属性名来获取对应的值( DISPATCH_PROPERTYGET )，也可以作为一个函数来调用（ DISPATCH_PROPERTYGET | DISPATCH_METHOD ）。 aardio会自动识别你的代码，如果使用的是"."成员操作符,并且紧接一个函数调用,例如 comObj.name(); 这时候aardio将comObj.name作为一个函数并调用该函数，其他获取属性的写法例如：
 
@@ -161,12 +167,14 @@ var name = comObj.name;
 COM对象的文本属性可以使用UTF16或UTF8编码的字符串赋值 - 即该字符串的string.getUtf(str)返回值为16或8。也可以成员名字前面添加"Unicode"后缀访问文本属性，例如用ele.innerTextUnicode获取 ele.innerText,这时候会返回一个Unicode文本，注意这种方式获取文本不能写为ele.innerTextUnicode()。
 
 也可以成员名字后面添加"get"或"set"前缀,这时候aardio会返回一个函数，get前缀返回一个用于读取属性的函数,而set前缀返回一个用于写入属性的函数.
+
+``` aau
 //comobj是一个com对象
 
-comobj.setText( "文本" ) //等价于
-comobj.Text = "文本"
+comobj.setText( "文本" ) //等价于 comobj.Text = "文本"
 
 txt = comobj.getText(); //等价于 txt = comobj.Text
+```
 
 ## com对象 数值索引成员
 
@@ -174,7 +182,9 @@ com对象有两种使用数值索引获取成员的方法.
 其一是像aardio一样使用[]索引操作符,例如 val = comobj[2];
 另外一种很常见的方式是使用()操作符,以函数调用的形式获取成员,例如:
 
-comobj .item(0) .Text="testitem"
+``` aau
+comobj.item(0).Text="testitem"
+```
 
 如果comobj.item是一个函数,那么一定要像上面这样写,将索引放到参数里.
 如果comobj.item不是一个函数,根据不同的com对象,可能是使用(),也可能是使用[]来传入索引,不清楚的情况下可以两种都试一下.
@@ -223,19 +233,21 @@ wb.doScript("
 
 ......此处的代码请参考本页开始的示例
 
-// 获取所有的地区标签 
-var 地区 = xml.getElementsByTagName("地区"); 
+``` aau
+// 获取所有的地区标签
+var 地区 = xml.getElementsByTagName("地区");
 
-for index, 市 in com.each( 地区) { 
+for index, 市 in com.each( 地区) {
 
-//获取市标签Node
-var 市 = 市.getElementsByTagName("市");
-io.print( " 市 Id: ", 市.item(0).attributes.item(0).nodeValue );
-io.print( " 市 value: ", 市.item(0).text );
-io.print( " 市 Id: ", 市.item(1).attributes.item(0).nodeValue );
-io.print( " 市 value: ", 市.item(1).text );
+   //获取市标签Node
+   var 市 = 市.getElementsByTagName("市");
+   io.print( "　　　市 Id: ", 市.item(0).attributes.item(0).nodeValue );
+   io.print( "　　　市 value: ", 市.item(0).text );
+   io.print( "　　　市 Id: ", 市.item(1).attributes.item(0).nodeValue );
+   io.print( "　　　市 value: ", 市.item(1).text );
 
 }
+```
 
 ## 获取IUnknown托管指针
 
@@ -287,17 +299,19 @@ com.GetPointer返回不是一个安全的托管指针,必须由你自已小心�
 
 **2、函数说明：**
 
-参数必须是IUnknown裸指针,该函数会将裸指针转换为安全的托管指针.并自动管理引用计数并自动释放. 
+参数必须是IUnknown裸指针,该函数会将裸指针转换为安全的托管指针.并自动管理引用计数并自动释放.
 与com.GetIUnknown()类似,托管指针有相同的元类型:com.IUnknown
 
 ## 自动释放com对象
 
 com.IDispatch对象、:com.IUnknown托管指针都会在废弃不用时自动释放.
 可以显式启动内存回收进行自动释放,如下:
+
+``` aau
 import com; //引用com库
 
-conn   = com.CreateObject("ADODB.Connection"); //创建数据库连接
-conn.ConnectionString =   "Provider=Microsoft.Jet.OLEDB.4.0;Data   Source=test.mdb"
+conn = com.CreateObject("ADODB.Connection"); //创建数据库连接
+conn.ConnectionString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=test.mdb"
 conn.Open();//打开数据库
 
 conn.close();//关闭数据库，首先调用com对象自已的关闭、释放函数
@@ -305,8 +319,8 @@ conn.close();//关闭数据库，首先调用com对象自已的关闭、释放�
 conn = null; //删除所有引用该对象的变量
 
 // 下面这句可以省略，垃圾回收器会在需要的时候自动执行
-
-    collectgarbage(); //执行垃圾回收，如果没有变量引用该对象，对象被安全删除
+collectgarbage(); //执行垃圾回收，如果没有变量引用该对象，对象被安全删除
+```
 
 ## 显式释放com对象
 
@@ -325,6 +339,7 @@ com.GetPointer(对象或指针) 的作用与com.Release相反，此函数会返�
 
 **3、函数示例：**
 
+``` aau
 //....... 省略前面的代码，请参考 lib/com/ipicture.aardio 库文件中的代码
 
 var hr,picture = ::OleLoadPicture(pIStream, #strBmp, 0, IID_IPicture, pIPicture );//用OleLoadPicture获得IPicture接口指针
@@ -335,6 +350,7 @@ if(hr)return; //不等于0为出错c
 //注意，你需要确认Release的是一个pointer指针类型，并且是一个com指针，
 // 并且你需要确认你在获取此指针时已经调用了AddRef，例如OleLoadPicture会隐含调用AddRef.
 // 如果不是对这些非常熟悉，请谨慎使用此函数直接释放pointer指针对象.
+```
 
 ## COM与aardio间的数据类型转换
 

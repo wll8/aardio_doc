@@ -2,22 +2,28 @@
 
 ## 随机字符串
 
-**str = string.random( len [, seed] )**
+`str = string.random( len [, seed] )`
 
 返回长度为len的随机字符串，seed为可选参数指定供随机选择字符的字符串(默认值为英文字母、数字)。
 seed参数可以使用中英文字符。
+
+``` aau
 io.open()
 io.print( string.random(10  ) )
 io.print( string.random(10 ,"seed参数可以使用中英文字符。") )
+```
 
 
-**str = string.random( str [, str2[, ...]] )**
+`str = string.random( str [, str2[, ...]] )`
 
 参数为多个字符串，随机选择其中一个字符串并作为返回值。
-io.open() 
-io.print( string.random( "待选字符串","待选字符串2","待选字符串3") );
 
-## **随机数**
+``` aau
+io.open()
+io.print( string.random( "待选字符串","待选字符串2","待选字符串3") );
+```
+
+## 随机数
 
 n = math.random(min,max)
 
@@ -28,24 +34,25 @@ n = math.random(min,max)
 
 请运行下面的创建随机数、随机字符串示例：
 
-> 
+``` aau
 io.open();//打开控制台
 
 最小数 = 1;
 最大数 = 1000
-随机数 = math.random(最小数,最大数)   //生成随机数
-io.print( 随机数   )?
+随机数 = math.random(最小数,最大数) //生成随机数
+io.print( 随机数 )?
 
 随机选择字符串 = string.random("字符串一","字符串二","字符串三")
 io.print( 随机选择字符串 )
 
 
 长度 = 3
-随机中文字符串 =   string.random( 长度, "这是中文字符集" )
+随机中文字符串 = string.random( 长度, "这是中文字符集" )
 io.print( 随机中文字符串 )
 
-随机英文数字字符串 =   string.random(长度)
+随机英文数字字符串 = string.random(长度)
 io.print( 随机英文数字字符串 )
+```
 
  你会发现每次的随机数都一样。
 
@@ -55,11 +62,10 @@ math.randomseed的参数可以是一个任意的数值，省略参数时，默�
 math.randomize在一个aardio程序中仅需调用一次就够了，一般不需要反复的调用。
 
 
-> 
+``` aau
 io.open();//打开控制台
 
-
-          **math.randomize()**
+math.randomize()
 
 随机数 = math.random(1,100) //生成随机数
 io.print( 随机数 )?
@@ -69,11 +75,12 @@ io.print( 随机选择字符串 )
 
 
 长度 = 3
-随机中文字符串 =   string.random( 长度, "这是中文字符集" )
+随机中文字符串 = string.random( 长度, "这是中文字符集" )
 io.print( 随机中文字符串 )
 
-随机英文数字字符串 =   string.random(长度)
+随机英文数字字符串 = string.random(长度)
 io.print( 随机英文数字字符串 )
+```
 
 
  上面是加上math.randomize以后的代码 ，每次运行将会返回不同的随机数。

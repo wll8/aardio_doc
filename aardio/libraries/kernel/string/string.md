@@ -84,34 +84,41 @@ execute("pause") //按任意键继续
 io.close();//关闭控制台
 ```
 
-**str2 = string.reverse(str)**
+`str2 = string.reverse(str)`
 
 字符串倒序排列。
 
-**chr = string.unpack(str, i [,j] )**
+`chr = string.unpack(str, i [,j] )`
 
  取字符串str的第i个字符到第j个字符的字节码(整数值)；
  第二个参数可以省略(使用默认值1)。
 
+``` aau
 chr = string.unpack("A");
 
-io.open(); 
+io.open();
 io.print(chr); //显示65
-**str = string.pack(   chr[,...] | tarrchars )**
+```
+
+`str = string.pack(   chr[,...] | tarrchars )`
 
  参数一个或多个整数值，或由数值组成的table数组，
 string.pack将每个整数作为字符的字节码并连接成一个字符串返回。
 
- 例如: str = string.pack(65,66,67);
-str = string.pack( {65;66;67} ); //参数也可以是一个数组
-io.open( ); 
-io.print(str); //显示ABC
+ 例如:
 
-**str2 =string.lower(str)**
+``` aau
+str = string.pack(65,66,67);
+str = string.pack( {65;66;67} ); //参数也可以是一个数组
+io.open( );
+io.print(str); //显示ABC
+```
+
+`str2 =string.lower(str)`
 
 将字符串str转换为小写
 
-**str2 = string.upper(str)**
+`str2 = string.upper(str)`
 
 将字符串str转换为大写
 
@@ -120,9 +127,17 @@ io.print(str); //显示ABC
 aardio从不改变现有的字符串,字符串内存是只读的，所有相同的字符串会指向同一内存地址，而修改字符串总是返回新的字符串。
 
 string库所有的函数都是纯函数，遵守一个入口(参数)，一个出口(返回值)的原则，所以不要忘记使用返回值接收被改变的字符串。
+
+``` aau
 str = "abc";
-string. **upper** (str); //这样的代码没有任何意义,也不会改变str
+string.upper(str); //这样的代码没有任何意义,也不会改变str
+```
+
  正确的写法如下:
+
+``` aau
 str = "abc";
-str = string. **upper** (str);//不要忘记使用返回值接收被改变的字符串
+str = string.upper(str);//不要忘记使用返回值接收被改变的字符串
+```
+
  这个规律适合所有截取字符串、改变字符串的函数.

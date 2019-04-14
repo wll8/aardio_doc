@@ -22,10 +22,9 @@ BOOL PtInRect( RECT *lprc,POINT pt);
 ```
 
 下面是一个在API函数参数中使用结构体的完整范例程序:
+``` aau
 //在API函数中使用结构体
-
-  //=====================================================
-
+//=====================================================
 //导入DLL
 User32 := raw.loadDll("User32.dll");
 //声明API函数
@@ -33,20 +32,20 @@ GetCursorPos := User32.api( "GetCursorPos", "word(struct& point)")
 
 //通常，我们使用class来定义API函数中需要用到的结构体：
 class Point {
-int x=0; 
+int x=0;
 int y=0;
 };
-
 /* aardio 允许在table或class成员的键名字前面添加一个描述性标识符，标识符遵循普通变量命名规则。
 可以通过"_struct" 只读字段再次读取所有的API数据类型描述。*/
-
 //创建一个新的结构体
 p = Point();
 
 //使用API函数
 GetCursorPos(p);
+
 //p是按引用传递的参数
 io.print(p.x,p.y)
+```
 
 ## 转换结构体类型
 
@@ -66,20 +65,22 @@ raw.convert( 源数据,目标结构体,偏移量=0 )
 **3、调用示例：**
 
 下面是使用raw.convert编写的一个数值类型转换小程序。
-io.open() 
 
-var  to = { 
-union u= { //union联合体表示几个变量共用一个内存位置，利用此特性，可以将同一数据转换为不同的数据类型。
-byte byte = -1;
-BYTE ubyte = -1; 
-} 
-} 
+``` aau
+io.open()
 
-var from =
-  { byte x= -1 }
+var to = {
+   union u= { //union联合体表示几个变量共用一个内存位置，利用此特性，可以将同一数据转换为不同的数据类型。
+      byte byte = -1;
+      BYTE ubyte = -1;
+   }
+}
+
+var from = { byte x= -1 }
 
 
-io.print( raw.convert(  from, to ).u.ubyte ) //将 -1 转换为无符号单字节数值 255
+io.print( raw.convert( from, to ).u.ubyte ) //将 -1 转换为无符号单字节数值 255
+```
 
 ## 获取结构体内存长度
 
@@ -94,17 +95,19 @@ raw.sizeof( 目标结构体 | 或静态类型名字 )
 
  返回结构体的内存长度，参数可以是一个结构体(struct table)，也可以是一个字符串形式的API数据类型名字。
 
-io.open() 
+``` aau
+io.open()
 
-var struct = { 
-union u= {
-byte byte = -1;
-BYTE ubyte = -1; 
-};
-int n = 123;
-} 
+var struct = {
+   union u= {
+      byte byte = -1;
+      BYTE ubyte = -1;
+   };
+   int n = 123;
+}
 
 io.print( raw.sizeof( struct ) )
+```
 
 ## 自定义结构体对齐大小
 
@@ -270,6 +273,7 @@ io.print( raw.sizeof( c ),raw.sizeof( c2 ) ,raw.sizeof( c3 ) )
 
 下面是示例：
 
+``` aau
 import win;
 
 //创建一个结构体
@@ -281,7 +285,6 @@ import win;
 数组[2] = ::POINT()
 数组[2].x = 45645
 数组[2].y = 999
-
 //转换为API数组
 ac = raw.toarray( 数组 )
 
@@ -294,3 +297,4 @@ st = raw.convert( ud,ac );
 //输出
 io.open();
 io.print( table.tostring(st) )
+```

@@ -13,7 +13,7 @@ winex库主要扩展win库的功能，并提供管理外部进程窗口的函数
 
 **2、函数说明：**
 
- 所有参数可选. 
+ 所有参数可选.
 
  检测给定窗口句柄的窗口属性,与给定的参数进行比较,如果相符返回真(true),否则返回假(false)
  使用模糊匹配比较类名、标题，支持 [模式语法](libraries/kernel/string/pattern%20syntax) 。
@@ -28,8 +28,9 @@ winex库中查找窗口的函数多是调用此函数对窗口进行匹配.
 hwnd,线程ID,进程ID = winex.find( 类名,标题,进程ID,线程ID )
 ```
 
+?> 注意：本文档中 hwnd 用于表示窗口句柄的变量名。
 
- 注意：本文档中 hwnd 用于表示窗口句柄的变量名。 **2、函数说明：**
+ **2、函数说明：**
 
  按给定的参数查找指定的窗口，所有参数都是可选参数。
 winex.find使用模糊匹配来查找类名、标题，支持 [模式语法](libraries/kernel/string/pattern%20syntax) 。
@@ -121,26 +122,24 @@ winex.findExists同样支持使用模糊匹配来查找类名、标题，支持 
 
 **3、调用示例：**
 
-<pre>io.open();//&#x6253;&#x5F00;&#x63A7;&#x5236;&#x53F0;
-
+``` aau
+import process;
 import winex;
-import process
 
-//&#x8FD0;&#x884C;&#x8BB0;&#x4E8B;&#x672C;
-process.execute( &quot;notepad.exe&quot;)
 
-//&#x67E5;&#x627E;&#x6807;&#x9898;&#x5305;&#x542B;&quot;&#x8BB0;&#x4E8B;&#x672C;&quot;,&#x5E76;&#x5305;&#x542B;&#x7C7B;&#x540D;&#x4E3A;&quot;Edit&quot;&#x63A7;&#x4EF6;&#x7684;&#x7A97;&#x53E3;.
-&#x7A97;&#x53E3;&#x53E5;&#x67C4;,&#x63A7;&#x4EF6;&#x53E5;&#x67C4;,&#x7EBF;&#x7A0B;ID,&#x8FDB;&#x7A0B;ID = winex.findExists(&quot;&lt;Notepad&gt;|&lt;&#x8BB0;&#x4E8B;&#x672C;&gt;&quot;,&quot;&quot;, ,&quot;Edit&quot;)
+//运行记事本
+process.execute("notepad.exe")
 
-//&#x663E;&#x793A;&#x7ED3;&#x679C;
-io.print( &#x7A97;&#x53E3;&#x53E5;&#x67C4;,&#x63A7;&#x4EF6;&#x53E5;&#x67C4;,&#x7EBF;&#x7A0B;ID,&#x8FDB;&#x7A0B;ID  )
+//打开控制台
+io.open()
 
-//&#x5173;&#x95ED;&#x7A97;&#x53E3;
-win.close(&#x7A97;&#x53E3;&#x53E5;&#x67C4;)
+//查找
+var hwnd = win.find("Notepad");//查找父窗口
+var hedit = winex.findEx(hwnd,1,"Edit" ); //查找第一个类名为Edit的子窗口
 
-execute(&quot;pause&quot;) //&#x6309;&#x4EFB;&#x610F;&#x952E;&#x7EE7;&#x7EED;
-io.close();//&#x5173;&#x95ED;&#x63A7;&#x5236;&#x53F0;
-</pre>
+//输出结果
+io.print("找到记事本中的文本框句柄：", hedit )
+```
 
 ## winex.findActivate
 
@@ -185,7 +184,7 @@ io.close();//&#x5173;&#x95ED;&#x63A7;&#x5236;&#x53F0;
 
  所有参数都是可选参数,但一般应指定父窗口标题与控件文本.
  这个函数内部调用winex.findExists,所以参数用法与winex.findExists完全一致,请参考此函数说明.
-winex.wait同样支持使用模糊匹配来查找类名、标题，支持 [模式查找语法](libraries/kernel/string/pattern%20syntax) 。 
+winex.wait同样支持使用模糊匹配来查找类名、标题，支持 [模式查找语法](libraries/kernel/string/pattern%20syntax) 。
 
  该函数指定一些可选的参数,等待指定的窗口创建,然后返回.
  可使用 winex.waitTimeout 指定超时值(以毫秒为单位),如果此属性为null空值,表示永不超时.
@@ -196,28 +195,27 @@ winex.wait同样支持使用模糊匹配来查找类名、标题，支持 [模�
 
 **3、调用示例：**
 
-<pre>io.open();//&#x6253;&#x5F00;&#x63A7;&#x5236;&#x53F0;
+``` aau
+io.open();//打开控制台
 
 import winex;
 import process
 
-//&#x8FD0;&#x884C;&#x8BB0;&#x4E8B;&#x672C;
-process.execute( &quot;notepad.exe&quot;)
+//运行记事本
+process.execute( "notepad.exe")
 
-//&#x67E5;&#x627E;&#x6807;&#x9898;&#x5305;&#x542B;&quot;&#x8BB0;&#x4E8B;&#x672C;&quot;,&#x5E76;&#x5305;&#x542B;&#x7C7B;&#x540D;&#x4E3A;&quot;Edit&quot;&#x63A7;&#x4EF6;&#x7684;&#x7A97;&#x53E3;.
-&#x7A97;&#x53E3;&#x53E5;&#x67C4;,&#x63A7;&#x4EF6;&#x53E5;&#x67C4;,&#x7EBF;&#x7A0B;ID,&#x8FDB;&#x7A0B;ID = winex.wait(&quot;&lt;Notepad&gt;|&lt;&#x8BB0;&#x4E8B;&#x672C;&gt;&quot;,&quot;&quot;, ,&quot;Edit&quot;)
+//查找标题包含"记事本",并包含类名为"Edit"控件的窗口.
+窗口句柄,控件句柄,线程ID,进程ID = winex.findExists("<Notepad>|<记事本>","", ,"Edit")
 
-//&#x663E;&#x793A;&#x7ED3;&#x679C;
-io.print( &#x7A97;&#x53E3;&#x53E5;&#x67C4;,&#x63A7;&#x4EF6;&#x53E5;&#x67C4;,&#x7EBF;&#x7A0B;ID,&#x8FDB;&#x7A0B;ID  )
+//显示结果
+io.print( 窗口句柄,控件句柄,线程ID,进程ID  )
 
-io.print(&quot;&#x8BF7;&#x5173;&#x95ED;&#x6253;&#x5F00;&#x7684;&#x8BB0;&#x4E8B;&#x672C;&#x7A97;&#x53E3;&quot;)
-winex.waitClose(&quot;&lt;Notepad&gt;|&lt;&#x8BB0;&#x4E8B;&#x672C;&gt;&quot;,&quot;&quot;, ,&quot;Edit&quot;);
-..io.print(&quot;&#x7A97;&#x53E3;&#x5173;&#x95ED;&#x4E86;&quot;)
+//关闭窗口
+win.close(窗口句柄)
 
-execute(&quot;pause&quot;) //&#x6309;&#x4EFB;&#x610F;&#x952E;&#x7EE7;&#x7EED;
-io.close();//&#x5173;&#x95ED;&#x63A7;&#x5236;&#x53F0;
-
- </pre>
+execute("pause") //按任意键继续
+io.close();//关闭控制台
+```
 
 ## winex.waitClose
 
@@ -268,7 +266,7 @@ io.close();//&#x5173;&#x95ED;&#x63A7;&#x5236;&#x53F0;
 
 **2、函数说明：**
 
- 此函数用法与winex.waitClose类似,请参考winex.waitClose说明. 
+ 此函数用法与winex.waitClose类似,请参考winex.waitClose说明.
 
 winex.waitActive返回激活窗口的句柄.如果使用了winex.wait相同的参数,则返回与winex.wait相同的返回值(窗口句柄,控件句柄,线程ID,进程ID)
 
@@ -335,7 +333,7 @@ winex.enumTop( 回调函数 )
 
 **2、函数说明：**
 
-枚举所有桌面顶层窗口。 
+枚举所有桌面顶层窗口。
 每查找到一个窗口就调用第一个参数指定的回调函数。回调函数按下面的格式定义：
 
 ``` aau
@@ -449,10 +447,10 @@ un为可选参数，默认为_CWP_SKIPINVISIBLE，其他可选参数：
 
 |  参数 |  说明 |
 | --- | --- |
-| 0x0000/*_CWP_ALL*/ |  测试所有窗口 |
-| 0x0001/*_CWP_SKIPINVISIBLE*/ |  忽略不可见窗口 |
-| 0x0002/*_CWP_SKIPDISABLED*/ |  忽略已屏蔽的窗口 |
-| 0x0004/*_CWP_SKIPTRANSPARENT* / |  忽略透明窗口 |
+| `0x0000/*_CWP_ALL*/` |  测试所有窗口 |
+| `0x0001/*_CWP_SKIPINVISIBLE*/` |  忽略不可见窗口 |
+| `0x0002/*_CWP_SKIPDISABLED*/` |  忽略已屏蔽的窗口 |
+| `0x0004/*_CWP_SKIPTRANSPARENT*/` |  忽略透明窗口 |
 
 ## winex.fromClientPointReal
 
@@ -564,7 +562,7 @@ winex.click( hwnd,menuid)
 
 参数应指定一个非当前线程的窗口,如果第二个参数为真(可省略参数,默认为真)。
 
-通常，系统内的每个线程都有自己的输入队列。winex.attach允许目标窗口与当前线程共享输入队列。连接了线程后，输入焦点、窗口激活、鼠标捕获、键盘状态以及输入队列状态都会进入共享状态 返回值 Long，非零表示成功，零表示失败， 
+通常，系统内的每个线程都有自己的输入队列。winex.attach允许目标窗口与当前线程共享输入队列。连接了线程后，输入焦点、窗口激活、鼠标捕获、键盘状态以及输入队列状态都会进入共享状态 返回值 Long，非零表示成功，零表示失败，
 
 调用winex.attach以后,可以在附加的目标窗口使用 win.getFocus() win.setFocus() 等函数,也可以方便的使用winex.key winex.mouse等函数库提供的后台模拟函数.
 
