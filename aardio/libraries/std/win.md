@@ -1,6 +1,6 @@
 # win库
 
-win库主要提供windows系统函数、本进程窗口操作函数。外部窗口管理参考扩展库：[winex](libraries/std/winex)
+win库主要提供windows系统函数、本进程窗口操作函数。外部窗口管理参考扩展库：[winex](http://bbs.aardio.com/doc/reference/libraries/std/winex.html)
 
 ## :: 操作符使用约定
 
@@ -129,7 +129,7 @@ ok = win.msgboxTest( 消息,标题,父窗口 )
 
 **2、函数说明：**
 
-除第一个参数外，其他参数可选，该函数调用win.msgbox弹出一个带确定按钮、取消按钮的询问对话框，如果用户按确定返回true，否则返回false。 
+除第一个参数外，其他参数可选，该函数调用win.msgbox弹出一个带确定按钮、取消按钮的询问对话框，如果用户按确定返回true，否则返回false。
 
 **3、函数定义：**
 
@@ -273,7 +273,7 @@ win.pumpMessage()
 **2、函数说明：**
 
 等待并处理下一个消息，如果没有消息就一直等待。
-win.pumpMessage不会象win.delay那样计时，也不会象 win.loopMessage那样循环执行。 
+win.pumpMessage不会象win.delay那样计时，也不会象 win.loopMessage那样循环执行。
 
 实际上除了用户操作以外，窗口也会频繁的发生各种内部消息，例如窗口重绘等消息，所以一般情况下，win.pumpMessage会较快的返回，如果在循环中希望响应用户操作，可以使用win.pumpMessage来替代win.delay。
 

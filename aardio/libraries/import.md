@@ -58,20 +58,23 @@ aardio会优先加载编译发布EXE时嵌入EXE文件的库模块。
 
 如果仍然没有找到库。在启动当前进程的EXE文件根目录下的的lib目录下查询库文件，从根目录逐渐向下层子目录开始搜索，查找顺序如下(按查找顺序先后排列)：
 
-> ~\lib\time.ole.aardio
-> ~\lib\time\ole.aardio
-> ~\lib\time\ole\_.aardio
->
+``` txt
+~\lib\time.ole.aardio
+~\lib\time\ole.aardio
+~\lib\time\ole\_.aardio
+```
 > 如果找到aardio代码文件或编译后的二进制aardio文件，加载并运行，并将文件路径作为参数传递给目标文件。
 
 ### 5、查询用户库
 
 如果仍然没有找到，按第三步的过程，在当前工程目录\lib目录，或启动文件所在目录\lib目录下查找用户库, 查找顺序如下(按查找顺序先后排列)：
 
-> \lib\time.ole.aardio
-> \lib\time\ole.aardio
-> \lib\time\ole\_.aardio
->
+``` txt
+\lib\time.ole.aardio
+\lib\time\ole.aardio
+\lib\time\ole\_.aardio
+```
+
 > 如果找到aardio代码文件或编译后的二进制aardio文件，加载并运行，并将文件路径作为参数传递给目标文件。
 
 
