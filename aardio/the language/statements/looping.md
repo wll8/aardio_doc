@@ -155,7 +155,7 @@ execute("pause") //按任意键继续
 io.close();//关闭控制台
 ```
 
-## **for...in泛型循环 语句。**
+## for...in泛型循环 语句。
 
 请参考：[泛型for与迭代器](the%20language/statements/iterator)
 
@@ -166,12 +166,12 @@ io.close();//关闭控制台
 并且尽可能的使中断语句的使用简洁而清晰、并使他们保持一致性的规律(例如在相同的深度的嵌套层)。
 
 
-### **1、break语句**
+### 1、break语句
 
 break语句中断并退出循环并跳转到指定循环的结束点以后开始执行。
 
 
-### **2、continue语句**
+### 2、continue语句
 
 continue语句跳过循环体剩下的部分，跳转到循环体的开始处并继续执行下一次循环。
 类似一种不执行循环体剩余部分代码的条件语句。
@@ -180,7 +180,7 @@ continue语句跳过循环体剩下的部分，跳转到循环体的开始处并
 使程序拥有清晰的结构。
 
 
-### **3、带标号的break、continue语句(labeled break、labeled continue)**
+### 3、带标号的break、continue语句(labeled break、labeled continue)
 
 aardio支持带标号的break、continue语句。
 

@@ -2,7 +2,7 @@
 
  参考： [for循环语句](the%20language/statements/looping#for) [循环中断语句(break、continue)](the%20language/statements/looping#break)
 
-## **迭代器**
+## 迭代器
 
 请参考：[函数闭包](the%20language/function/closure)
 

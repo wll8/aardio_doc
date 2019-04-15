@@ -9,7 +9,7 @@
 ## 枚举
 
 枚举：指调用一个枚举函数、一次性列举出集合中的元素，通常需要指定一个触发器函数作为参数。
-枚举函数以enum作为前缀，例如winex.enum枚举函数可以列举所有桌面窗口：
+`枚举函数以enum作为前缀`，例如winex.enum枚举函数可以列举所有桌面窗口：
 
 ``` aau
 io.open();//打开控制台
@@ -55,7 +55,7 @@ function enumTop( onfind ) {
 ## 迭代
 
 枚举：迭代函数通常用于for...in语句中，创建一个迭代器，用以遍历集合成员。
-迭代函数以each作为前缀，例如com.each函数、winex.each函数
+`迭代函数以each作为前缀`，例如com.each函数、winex.each函数
 
 ``` aau
 io.open();//打开控制台
