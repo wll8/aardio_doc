@@ -1,6 +1,6 @@
 # aardio 文档
 
-根据 [官方帮助手册](http://bbs.aardio.com/doc/reference/) 制作了一份文档，
+根据官方帮助手册制作了一份文档，
 
 与官方保持更新及风格一致的同时，添加了一些特性，以下列举一部分。
 
@@ -34,3 +34,9 @@
 - [函数库](libraries/import.md)
 - [web程序设计](web/html.md)
 - [更多内容...](_sidebar.md)
+- [...](_sidebar.md)
+
+## 相关资源
+
+- [官方帮助手册](http://bbs.aardio.com/doc/reference/)
+- [历史版本下载](https://hongqiye.com/s2/80/app/) 收集于网络，自行检查安全性。
