@@ -5,12 +5,12 @@
 ## 简介
 
 属性是web窗体提供的数据成员.
- 本手册中约定使用 wb变量名表示web.form类创建的web窗体对象.使用ele表示web窗体中的元素对象,这也是aardio中默认约定具有特殊意义的变量名,不应将这些默认变量名用于其他目的.
+
+?> 本手册中约定使用 wb变量名表示web.form类创建的web窗体对象.使用ele表示web窗体中的元素对象,这也是aardio中默认约定具有特殊意义的变量名,不应将这些默认变量名用于其他目的.
 
 ## wb._browser
 
-wb._browser
-  是浏览器控件对象,这是一个com对象,可以使用com.DumpTypeInfo例出成员
+wb._browser 是浏览器控件对象,这是一个com对象,可以使用com.DumpTypeInfo例出成员
 
 ``` aau
 io.open()

@@ -4,14 +4,15 @@
 
 ## 复选框
 
-一个复选框如下: 
+一个复选框如下:
 
-``` aau
-这是复选框
-```
+?> <input type="checkbox" name="checkbox" id="checkbox" /> 这是复选框
+
 
 HTML源码如下:
-<pre>&lt;input type=&quot;checkbox&quot; name=&quot;checkbox&quot; id=&quot;checkbox&quot; /&gt;</pre>
+``` html
+<input type="checkbox" name="checkbox" id="checkbox" />
+```
 
 控制复选框是否选中.
 
@@ -23,15 +24,15 @@ ele.checked = true;
 
 ## 单选框
 
-一个单选框如下: 
+一个单选框如下:
 
-``` aau
-这是单选框 这是单选框2
-```
+?> <input type="radio" name="radio" id="radio1" /> 这是单选框 <input type="radio" name="radio" id="radio2" /> 这是单选框2
 
 HTML源码如下:
-<pre>&lt;input type=&quot;radio&quot; name=&quot;radio&quot; id=&quot;radio1&quot; /&gt;
-&lt;input type=&quot;radio&quot; name=&quot;radio&quot; id=&quot;radio2&quot; /&gt;</pre>
+``` html
+<input type="radio" name="radio" id="radio1" />
+<input type="radio" name="radio" id="radio2" />
+```
 
 单选框通常有多个,并且名字相同,而ID不同,使用 [wb.getEles](web/getele#getEles) 函数可以返回所有同名单选控件的com对象数组.
 改变选定状态与复选框类似,即改变checked属性.
@@ -44,18 +45,21 @@ ele(0).checked = true;
 
 ## 下拉选框
 
-一个单选框如下: 
+一个单选框如下:
 
-``` aau
-选项
-  选项2
-```
+?> <select name="select" id="select" onchange="alert('我被改变了')">
+?>   <option value="值">选项</option>
+?>   <option value="值2">选项2</option>
+?> </select>
 
 HTML源码如下:
-<pre>&lt;select name=&quot;select&quot; id=&quot;select&quot; onchange=&quot;alert(&apos;&#x6211;&#x88AB;&#x6539;&#x53D8;&#x4E86;&apos;)&quot;&gt;
-  &lt;option value=&quot;&#x503C;&quot;&gt;&#x9009;&#x9879;&lt;/option&gt;
-  &lt;option value=&quot;&#x503C;2&quot;&gt;&#x9009;&#x9879;2&lt;/option&gt;
-&lt;/select&gt;</pre>
+
+``` html
+<select name="select" id="select" onchange="alert('我被改变了')">
+  <option value="值">选项</option>
+  <option value="值2">选项2</option>
+</select>
+```
 
 下拉选框有一个父节点select,然后有一系列的option选项节点.
 web.form库提供wb.select函数以改变选项.
@@ -83,48 +87,51 @@ ele =  wb.select("选项控件名", 查找参数,框架名)
 
 下面是一个完整示例,演示了控制选项控件的方法.
 
-<pre>import win.ui;
+``` aau
+import win.ui;
 /*DSG{{*/
-var winform = win.form(min=1;scroll=1;bottom=249;max=1;text=&quot;aardio Form&quot;;right=349 )
+var winform = win.form(min=1;scroll=1;bottom=249;max=1;text="aardio Form";right=349 )
 winform.add(  )
 /*}}*/
 
 import web.form;
 
-//&#x521B;&#x5EFA;web&#x7A97;&#x4F53;
+//创建web窗体
 var wb = web.form( winform
-	,//&#x53EF;&#x8F93;&#x5165;_UIFLAG_ &#x524D;&#x7F00;&#x7684;&#x5E38;&#x91CF;&#x81EA;&#x5B9A;&#x4E49;&#x5916;&#x89C2;
-	,//&#x53EF;&#x8F93;&#x5165;_DLCTL_ &#x524D;&#x7F00;&#x7684;&#x5E38;&#x91CF;&#x4EE5;&#x63A7;&#x5236;&#x4E0B;&#x8F7D;&#x884C;&#x4E3A;
+	,//可输入_UIFLAG_ 前缀的常量自定义外观
+	,//可输入_DLCTL_ 前缀的常量以控制下载行为
 	);
 
+
 html = /*
-&lt;input type=&quot;radio&quot; name=&quot;radio&quot; id=&quot;radio&quot; value=&quot;radio&quot; /&gt;
-&lt;input type=&quot;radio&quot; name=&quot;radio&quot; id=&quot;radio2&quot; value=&quot;radio2&quot; /&gt;
-&lt;input type=&quot;checkbox&quot; name=&quot;checkbox&quot; id=&quot;checkbox&quot; /&gt;
-&lt;select name=&quot;select&quot; id=&quot;select&quot; onchange=&quot;alert(&apos;&#x6211;&#x88AB;&#x6539;&#x53D8;&#x4E86;&apos;)&quot;&gt;
-  &lt;option value=&quot;&#x503C;&quot;&gt;&#x9009;&#x9879;&lt;/option&gt;
-  &lt;option value=&quot;&#x503C;2&quot;&gt;&#x9009;&#x9879;2&lt;/option&gt;
-&lt;/select&gt;
+<input type="radio" name="radio" id="radio" value="radio" />
+<input type="radio" name="radio" id="radio2" value="radio2" />
+<input type="checkbox" name="checkbox" id="checkbox" />
+<select name="select" id="select" onchange="alert('我被改变了')">
+  <option value="值">选项</option>
+  <option value="值2">选项2</option>
+</select>
  */
 
 wb.write(html)
 winform.show()
 
-//&#x5355;&#x9009;&#x6846;
-ele = wb.getEles(&quot;radio&quot;)
+//单选框
+ele = wb.getEles("radio")
 ele(0).checked = true;
 
-//&#x590D;&#x9009;&#x6846;
-ele = wb.getEle(&quot;checkbox&quot;)
+//复选框
+ele = wb.getEle("checkbox")
 ele.checked = true;
 
-//&#x4E0B;&#x62C9;&#x9009;&#x6846;
-wb.select(&quot;select&quot;,&quot;&#x503C;2&quot;); //&#x53C2;&#x6570;&#x4E8C;&#x53EF;&#x4EE5;&#x662F;&#x7D22;&#x5F15;,&#x4E5F;&#x53EF;&#x4EE5;&#x662F;&#x9009;&#x9879;&#x7684;&#x503C;,&#x6216;&#x8005;&#x9009;&#x9879;&#x7684;&#x663E;&#x793A;&#x6587;&#x672C;
+//下拉选框
+wb.select("select","值2"); //参数二可以是索引,也可以是选项的值,或者选项的显示文本
 
-//&#x4E0B;&#x62C9;&#x9009;&#x6846;
-ele = wb.select(&quot;select&quot;,1) //&#x6B64;&#x51FD;&#x6570;&#x8FD4;&#x56DE;&#x9009;&#x9879;&#x8282;&#x70B9;&#x5BF9;&#x8C61;
+//下拉选框
+ele = wb.select("select",1) //此函数返回选项节点对象
 
-//&#x8FDB;&#x5165;&#x6D88;&#x606F;&#x5FAA;&#x73AF;
+
+//进入消息循环
 win.loopMessage();
 return wb,winform;
-</pre>
+```

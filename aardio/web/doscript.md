@@ -16,18 +16,19 @@ wb.doScript( 要执行的脚本代码,框架名字="",脚本语言名称="javasc
 
 **3、调用示例：**
 
-<pre>
-<span>//....&#x7701;&#x7565;&#x521B;&#x5EFA;web&#x7A97;&#x4F53;&#x7684;&#x4EE3;&#x7801;,&#x8BF7;&#x5728;&#x4E2D;&#x70B9;&#x51FB;&quot;&#x4E3B;&#x83DC;&#x5355;-&gt;&#x65B0;&#x5EFA;&#x6587;&#x4EF6;-&gt;&#x65B0;&#x5EFA;web&#x7A97;&#x4F53;&quot;</span>
+``` aau
+//....省略创建web窗体的代码,请在中点击"主菜单->新建文件->新建web窗体"
 
-wb.write(&quot;&lt;a href=&apos;#&apos; onclick=&apos;func()&apos;&gt;&#x6267;&#x884C;wb.doScript&#x521B;&#x5EFA;&#x7684;&#x51FD;&#x6570;&lt;/a&gt;&quot;)
+wb.write("<a href='#' onclick='func()'>执行wb.doScript创建的函数</a>")
 
-js = <span>/*
+js = /*
 
 	function func(){
-		alert(&apos;&#x6211;&#x662F;js,&#x6211;&#x7684;&#x8BED;&#x6CD5;&#x4E0E;aardio&#x5F88;&#x76F8;&#x4F3C;,&#x90FD;&#x662F;C&#x7CFB;&#x8BED;&#x6CD5;&#x54E6;&apos;)
+		alert('我是js,我的语法与aardio很相似,都是C系语法哦')
 	}
 	func();
 
-*/</span>
+*/
 
-wb.doScript( js )</pre>
+wb.doScript( js )
+```

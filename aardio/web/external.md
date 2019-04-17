@@ -1,6 +1,6 @@
 # 在网页中调用aardio代码
 
- 参考:[创建web窗体](web/webform) [在aardio中执行网页脚本](web/doScript)
+ 参考:[创建web窗体](web/webform) [在aardio中执行网页脚本](web/doscript)
 
 ## wb.external
 
@@ -36,19 +36,22 @@ wb.doScript("javascript:external.aardio_func(123);")
 ```
 
 **4、调用示例：**
-<pre><span>//....&#x7701;&#x7565;&#x521B;&#x5EFA;web&#x7A97;&#x4F53;&#x7684;&#x4EE3;&#x7801;,&#x8BF7;&#x5728;&#x4E2D;&#x70B9;&#x51FB;&quot;&#x4E3B;&#x83DC;&#x5355;-&gt;&#x65B0;&#x5EFA;&#x6587;&#x4EF6;-&gt;&#x65B0;&#x5EFA;web&#x7A97;&#x4F53;&quot;</span>
+``` aau
+//....省略创建web窗体的代码,请在中点击"主菜单->新建文件->新建web窗体"
 
-<span>//&#x53EA;&#x8981;&#x662F;web&#x7A97;&#x4F53;external&#x5185;&#x7684;&#x6210;&#x5458;&#xFF0C;&#x90FD;&#x53EF;&#x4EE5;&#x4ECE;&#x7F51;&#x9875;&#x4E0A;&#x8C03;&#x7528;</span>
-wb.<strong>external</strong> = {
-    <strong>showmsg</strong> = function (txt){
-        win.msgbox(txt, &quot;aardio&quot;);
+//只要是web窗体external内的成员，都可以从网页上调用
+wb.external = {
+    showmsg = function (txt){
+        win.msgbox(txt, "aardio");
         return true;
     }
 }
 
-<span>//&#x5728;&#x7F51;&#x9875;&#x7684;javascript&#x91CC;&#x53EF;&#x4EE5;&#x76F4;&#x63A5;&#x8C03;&#x7528;external&#x6210;&#x5458;</span>
-wb.write( &quot;
-&lt;button onclick=&apos;<span>external.showmsg</span>(123)&apos; &gt;&#x6211;&#x662F;&#x7F51;&#x9875;&#x4E0A;&#x7684;&#x6309;&#x94AE;&lt;/button&gt;
-&quot; )</pre>
-external使用的是IDispatch接口,请参考:
-[创建IDispatch接口](libraries/kernel/com/interface#IDispatch)
+
+//在网页的javascript里可以直接调用external成员
+wb.write( "
+<button onclick='external.showmsg(123)' >我是网页上的按钮</button>
+" )
+```
+
+external使用的是IDispatch接口,请参考:[创建IDispatch接口](libraries/kernel/com/interface#IDispatch)

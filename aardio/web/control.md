@@ -5,7 +5,8 @@
 ## 控制web窗体
 
 我们可以使用web窗体提供的函数控制web窗体的动作。
- 本手册中约定使用 wb变量名表示web.form类创建的web窗体对象.使用ele表示web窗体中的元素对象,这也是aardio中默认约定具有特殊意义的变量名,不应将这些默认变量名用于其他目的.
+
+?> 本手册中约定使用 wb变量名表示web.form类创建的web窗体对象.使用ele表示web窗体中的元素对象,这也是aardio中默认约定具有特殊意义的变量名,不应将这些默认变量名用于其他目的.
 
 ## wb.go
 
@@ -81,7 +82,7 @@ wb.goback()
 
 **2、函数说明：**
 
-后退到上一次打开的网页.可以响应 [wb.CommandStateChange](web/event#CommandStateChange) 来判断是否可以后退. 
+后退到上一次打开的网页.可以响应 [wb.CommandStateChange](web/event#CommandStateChange) 来判断是否可以后退.
 
 ## wb.goforward
 

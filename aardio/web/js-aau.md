@@ -1,6 +1,6 @@
 # JS与aardio语法比较(面向对象部分)
 
- 参考:[在网页脚本中调用aardio函数](web/external) [在aardio中执行网页脚本](web/doScript)
+ 参考:[在网页脚本中调用aardio函数](web/external) [在aardio中执行网页脚本](web/doscript)
 
 ## 概述
 
@@ -12,13 +12,13 @@ Javascript、aardio的语法都是基于C系语法，而且同是动态语言，
 
 aardio与Javascript的语法差异主要表现在面向对象有关的一些语法上。
 下面我们以此为重点介绍两种语言在实现面向对象特性时的一些语法区别.
- 参考资料:
-[aardio中的类](the%20language/class/class)
+ 参考资料: [aardio中的类](the%20language/class/class)
 
 ## 数据集合
 
 在aardio中表示数据集合只有一种对象，即[table对象](the%20language/datatype/datatype#vartable)，table对象不但可以包含键值对，而且可以包含数组，[table对象](the%20language/datatype/datatype#vartable)所有成员放在大括号中，并用分号分隔。
-aardio用大括号表示集合，无论是指令集合(语句块)，还是数据集合(table)
+
+> aardio用大括号表示集合，无论是指令集合(语句块)，还是数据集合(table)
  并且使用分号分隔元素，无论是指令元素(语句)，还是数据成员(table成员)
  保持语法的简洁，和概念一致性。
 
@@ -42,7 +42,8 @@ io.print( tab[1] ) //显示123
 ```
 
 而在Javascript，分为对象字面量,以及数组。
- 字面量(Literals)：有时候叫直接量,对象直接量指的是定义对象的代码构造的匿名对象,因为对象在创建时还没有名字,表示的就是代码描述的值,即字面值或字面量.
+
+?> 字面量(Literals)：有时候叫直接量,对象直接量指的是定义对象的代码构造的匿名对象,因为对象在创建时还没有名字,表示的就是代码描述的值,即字面值或字面量.
 
 对象字面量,用冒号分隔键值对，而使用逗号分隔成员，例如:
 

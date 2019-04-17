@@ -9,7 +9,8 @@ web窗体实现了web事件接口. 当web窗体产生事件时(例如下载完�
 例如,对于一个web窗体对象wb,在用户在网页上右键点击网页时,如果自定义wb.showMenu事件函数,则调用该函数显示自定义的菜单,否则显示默认的菜单.
 
 每一个事件函数都是一个触发器函数、一个回调函数。在web窗体产生事件时通过回调触发事件函数.
- 本手册中约定使用 wb变量名表示web.form类创建的web窗体对象.使用ele表示web窗体中的元素对象,这也是aardio中默认约定具有特殊意义的变量名,不应将这些默认变量名用于其他目的.
+
+?> 本手册中约定使用 wb变量名表示web.form类创建的web窗体对象.使用ele表示web窗体中的元素对象,这也是aardio中默认约定具有特殊意义的变量名,不应将这些默认变量名用于其他目的.
 
 我们可以在开发环境中查看"标准库"窗口,选中web.form库,右键点击库,在弹出菜单中选择编辑源代码.
 打开web.form库,查看该库的源代码,可以看到在web.form构造函数的尾部有一句添加事件接口的代码.
@@ -38,15 +39,15 @@ x,y表示右键点击的坐标,而ele表示发生事件的节点对象, id表示
 
 | id |  说明 |
 | --- | --- |
-| 0/*_CONTEXT_MENU_DEFAULT */ |  默认右键菜单 |
-| 1/*_CONTEXT_MENU_IMAGE*/ |  图片右键菜单 |
-| 2/*_CONTEXT_MENU_CONTROL*/ |  控件右键菜单 |
-| 3/*ONTEXT_MENU_TABLE*/ |  表格 |
-| 4/*_CONTEXT_MENU_TEXTSELECT */ |  文本选区右键菜单 |
-| 5/*_CONTEXT_MENU_ANCHOR*/ |  锚点,超链接 |
-| 6/*_CONTEXT_MENU_UNKNOWN/ |  未知 |
-| 10/*_CONTEXT_MENU_VSCROLL*/ |  垂直滚动条 |
-| 11/*_CONTEXT_MENU_VSCROLL*/ |  水平滚动条 |
+| `0/*_CONTEXT_MENU_DEFAULT */` |  默认右键菜单 |
+| `1/*_CONTEXT_MENU_IMAGE*/` |  图片右键菜单 |
+| `2/*_CONTEXT_MENU_CONTROL*/` |  控件右键菜单 |
+| `3/*ONTEXT_MENU_TABLE*/` |  表格 |
+| `4/*_CONTEXT_MENU_TEXTSELECT*/` |  文本选区右键菜单 |
+| `5/*_CONTEXT_MENU_ANCHOR*/` |  锚点,超链接 |
+| `6/*_CONTEXT_MENU_UNKNOWN/`|  未知 |
+| `10/*_CONTEXT_MENU_VSCROLL*/` |  垂直滚动条 |
+| `11/*_CONTEXT_MENU_VSCROLL*/` |  水平滚动条 |
 
 **3、调用示例：**
 
@@ -91,22 +92,23 @@ wb.showMsg=function( 提示信息, 对话框标题 ){
 
 **3、调用示例：**
 
-<pre><span>//....&#x7701;&#x7565;&#x521B;&#x5EFA;web&#x7A97;&#x4F53;&#x7684;&#x4EE3;&#x7801;,&#x8BF7;&#x5728;&#x4E2D;&#x70B9;&#x51FB;&quot;&#x4E3B;&#x83DC;&#x5355;-&gt;&#x65B0;&#x5EFA;&#x6587;&#x4EF6;-&gt;&#x65B0;&#x5EFA;web&#x7A97;&#x4F53;&quot;</span>
+``` aau
+//....省略创建web窗体的代码,请在中点击"主菜单->新建文件->新建web窗体"
 
-wb.showMsg=function(text/*&#x4FE1;&#x606F;*/,caption/*&#x6807;&#x9898;*/){
+wb.showMsg=function(text/*信息*/,caption/*标题*/){
 
-? ? closeDlg_t = function(title) {
-? ??   ???import winex;
-? ??   ???var hwnd,hctr =   winex.waitActive(title, ,&quot;#32770&quot;,&quot;Button&quot;);
-? ??   ???winex.click(hctr);
-? ? }
-? ? thread.create(closeDlg_t,caption/*&#x4F20;&#x9012;&#x53C2;&#x6570;&#x7ED9;&#x7EBF;&#x7A0B;*/ )
-? ? return true; /*&#x8FD4;&#x56DE;false&#x5219;&#x4E0D;&#x663E;&#x793A;&#x5BF9;&#x8BDD;&#x6846;*/
+	closeDlg_t = function(title) {
+		import winex;
+		var hwnd,hctr =   winex.waitActive(title, ,"#32770","Button");
+		winex.click(hctr);
+	}
+	thread.create(closeDlg_t,caption/*传递参数给线程*/ )
+	return true; /*返回false则不显示对话框*/
 }
 
-//&#x6253;&#x5F00;&#x76EE;&#x6807;&#x7F51;&#x7AD9;
-wb.write(&quot;&lt;script&gt;alert(&apos;&#x4F60;&#x597D;&#x5417;&apos;)&lt;/script&gt;&quot;
-</pre>
+//打开目标网站
+wb.write("<script>alert('你好吗')</script>"
+```
 
 ## wb.NewWindow2
 
@@ -233,9 +235,9 @@ wb.BeforeNavigate2=function( pDisp, url
 **2、函数说明：**
 
 导航(打开网址)以前触发此事件.刷新不触发
-pDisp web窗体对象 
+pDisp web窗体对象
 url 要打开的网址
-Flags 标志值 
+Flags 标志值
 TargetFrameName 目标框
 PostData 提交的表单数据
 Headers HTTP请求头
@@ -247,7 +249,7 @@ Cancel 是否取消导航
 return   url, Flags, TargetFrameName, PostData, Headers,Cancel;
 ```
 
-不需要返回值的输出参数可以省略或传递null值,例如: 
+不需要返回值的输出参数可以省略或传递null值,例如:
 
 ``` aau
 return   null, , , , ,true;
@@ -308,7 +310,7 @@ target 打开该网址的窗口名字
 statusCode 错误代码
 cancel 这是一个输出参数,指示是否取消导航到默认的错误页面.
 
-输出参数返回顺序为: 
+输出参数返回顺序为:
 
 ``` aau
 return url,target,statusCode,cancel
