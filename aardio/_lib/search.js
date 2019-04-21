@@ -42,22 +42,49 @@
         Docsify
           .get(vm.router.getFile(path), false)
           .then(function (result) {
-            var find_str = new RegExp(query,'i');
-            if(find_str.test(result)) {
-              var res = result.match(find_str)
-              var nearby = ''
-              if(res.index > 9) {
-                nearby = result.slice(res.index - 9, res.index + res[0].length + 10)
+
+            let list = []
+            let re = /[\r\n](#{1,6}.*)[\r\n]/
+            let find = (str) => {
+              let res = str.match(re)
+              if(res) {
+                list.push(res)
+                str = str.slice(res.index + 1)
+                find(str)
               } else {
-                nearby = result.slice(0, res.index + res[0].length + 10)
+                let one_title = str.match(/^\s*#(.*)/)
+                one_title && list.unshift(one_title)
+              }
+            }
+
+            find(result)
+
+            var find_str = new RegExp(query,'i');
+            list.forEach(item => {
+              // 在 md 文件中能找到所查询的内容
+              let result = item.input.slice(item.index)
+              var res = result.match(find_str)
+              if(!res) {return}
+              var nearby = ''
+              var find_ref = res[0]
+              var find_title = item[1]
+              var title_id_match = ($(marked(find_title)).find('a').attr('href') || '').match(/\?id=(.*)$/)
+              // var title_id = title_id_match && title_id_match[1] || ''
+              var title_id = title_id_match && title_id_match[1] || ''
+              if(res.index > 9) { // 所查找的内容在文件中的下标
+                // 截取查找到的内容的前9后字符到后10个字符
+                nearby = result.slice(res.index - 9, res.index + find_ref.length + 10)
+              } else {
+                nearby = result.slice(0, res.index + find_ref.length + 10)
               }
               nearby = nearby.replace(/\n/g, '↵')
               query_res.push({
-                content: nearby.replace(res[0], ("<em class=\"search-keyword\">" + res[0] + "</em>")),
-                title: decodeURI(path),
-                url: '#' + path,
+                find_ref,
+                content: nearby.replace(find_str, `<em class=\"search-keyword\">${find_ref}</em>`), // 添加关键字高亮标记
+                title: `<span class="title">${find_title.replace(/^#{1,6}/, '')}</span> <span data-title_id="${title_id}" class="file">=> ${decodeURI(path).split('/').pop()}</span>`,
+                url: `#${path}`,
               })
-            }
+            })
           });
       });
 
@@ -86,7 +113,7 @@
 
       var html = '';
       matchs.forEach(function (post) {
-        html += "<div class=\"matching-post\">\n<a href=\"" + (post.url) + "\">\n<h2>" + (post.title) + "</h2>\n<p>" + (post.content) + "</p>\n</a>\n</div>";
+        html += "<div class=\"matching-post\">\n<div data-href=\"" + (post.url) + "\">\n<h2>" + (post.title) + "</h2>\n<p>" + (post.content) + "</p>\n</div>\n</div>";
       });
 
       $panel.classList.add('show');
@@ -105,11 +132,23 @@
 
       var timeId;
       // Prevent to Fold sidebar
-      Docsify.dom.on(
-        $search,
-        'click',
-        function (e) { return e.target.tagName !== 'A' && e.stopPropagation(); }
-      );
+      $(document).on('click', '.search .matching-post', function(ev) {
+        let title = $(ev.currentTarget).find('.title').text().trim()
+        let link = $(ev.currentTarget).find('[data-href]').data('href')
+        let title_id = $(ev.currentTarget).find('[data-title_id]').data('title_id')
+        link = `${link}?id=${title}`
+        console.log('event', {
+          link,
+          title,
+          title_id,
+        })
+        location = link
+      })
+      // Docsify.dom.on(
+      //   $search,
+      //   'click',
+      //   function (e) { return e.target.tagName !== 'A' && e.stopPropagation(); }
+      // );
       Docsify.dom.on($input, 'input', function (e) {
         clearTimeout(timeId);
         timeId = setTimeout(function (_) { return doSearch(e.target.value); }, 100);
@@ -139,7 +178,104 @@
     }
 
     function style() {
-      var code = "\n.sidebar {\n  padding-top: 0;\n}\n\n.search {\n  margin-bottom: 20px;\n  padding: 6px;\n  border-bottom: 1px solid #eee;\n}\n\n.search .input-wrap {\n  display: flex;\n  align-items: center;\n}\n\n.search .results-panel {\n  display: none;\n}\n\n.search .results-panel.show {\n  display: block;\n}\n\n.search input {\n  outline: none;\n  border: none;\n  width: 100%;\n  padding: 0 7px;\n  line-height: 36px;\n  font-size: 14px;\n}\n\n.search input::-webkit-search-decoration,\n.search input::-webkit-search-cancel-button,\n.search input {\n  -webkit-appearance: none;\n  -moz-appearance: none;\n  appearance: none;\n}\n.search .clear-button {\n  width: 36px;\n  text-align: right;\n  display: none;\n}\n\n.search .clear-button.show {\n  display: block;\n}\n\n.search .clear-button svg {\n  transform: scale(.5);\n}\n\n.search h2 {\n  font-size: 17px;\n  margin: 10px 0;\n}\n\n.search a {\n  text-decoration: none;\n  color: inherit;\n}\n\n.search .matching-post {\n  border-bottom: 1px solid #eee;\n}\n\n.search .matching-post:last-child {\n  border-bottom: 0;\n}\n\n.search p {\n  font-size: 14px;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  display: -webkit-box;\n  -webkit-line-clamp: 2;\n  -webkit-box-orient: vertical;\n}\n\n.search p.empty {\n  text-align: center;\n}\n\n.app-name.hide, .sidebar-nav.hide {\n  display: none;\n}";
+      var code = `
+        .sidebar {
+          padding-top: 0;
+        }
+
+        .search {
+          margin-bottom: 20px;
+          padding: 6px;
+          border-bottom: 1px solid #eee;
+        }
+
+        .search .file{
+          font-size: 12px;
+          color: #666;
+        }
+
+        .search .input-wrap {
+          display: flex;
+          align-items: center;
+        }
+
+        .search .results-panel {
+          display: none;
+        }
+
+        .search .results-panel.show {
+          display: block;
+        }
+
+        .search input {
+          outline: none;
+          border: none;
+          width: 100%;
+          padding: 0 7px;
+          line-height: 36px;
+          font-size: 14px;
+        }
+
+        .search input,
+        .search input::-webkit-search-cancel-button,
+        .search input::-webkit-search-decoration {
+          -webkit-appearance: none;
+          -moz-appearance: none;
+          appearance: none;
+        }
+
+        .search .clear-button {
+          width: 36px;
+          text-align: right;
+          display: none;
+        }
+
+        .search .clear-button.show {
+          display: block;
+        }
+
+        .search .clear-button svg {
+          transform: scale(.5);
+        }
+
+        .search h2 {
+          font-size: 17px;
+          margin: 10px 0;
+        }
+
+        .search a {
+          text-decoration: none;
+          color: inherit;
+        }
+
+        .search .matching-post {
+          border-bottom: 1px solid #eee;
+          cursor: pointer;
+        }
+
+        .search .matching-post:last-child {
+          border-bottom: 0;
+        }
+
+        .search p {
+          font-size: 14px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          display: -webkit-box;
+          -webkit-line-clamp: 2;
+          -webkit-box-orient: vertical;
+        }
+
+        .search p.empty {
+          text-align: center;
+        }
+
+        .app-name.hide,
+        .sidebar-nav.hide {
+          display: none;
+        }
+
+      `;
 
       Docsify.dom.style(code);
     }
