@@ -20,6 +20,20 @@
   - 源码地址: https://github.com/wll8/doc/tree/master/aardio ，
   - 欢迎参与贡献~
 
+
+## 相关资源
+
+- [aardio 官网](http://www.aardio.com/)
+- [官方帮助手册](http://bbs.aardio.com/doc/reference/)
+- [官方论坛](http://bbs.aardio.com/)
+- 相关开源项目
+  - [aardio10开发企业管理系统:aardio-erp框架源码](https://github.com/carlaau/aardio-erp)
+  - [aardio网站开发mvc框架源码](https://github.com/carlaau/carlmvc)
+  - [hosts切换助手](https://github.com/xuzhenjun130/hostsSwitchHelper)
+  - [新浪博客下载工具](https://github.com/bituplink/sinablog-collect-aardio-ui-sinaBlogSeqDownload)
+  - [简约型问答社区网站](https://github.com/carlaau/fly)
+  - [待办事项管理](https://github.com/bituplink/setodo)
+
 ## 目录
 
 * [简介](introduction.md)
@@ -113,7 +127,7 @@
       * [table库](libraries/kernel/table/table.md)
     * [time库 - 日期时间](libraries/kernel/time/time.md)
       * [time库](libraries/kernel/time/time.md)
-  * [标准库](javascript:void(0.md)
+  * 标准库
     * [process库 - 进程操作](libraries/std/process/process.md)
       * [process库](libraries/std/process/process.md)
     * [winex库 - 外部窗口操作](libraries/std/winex/say.md)
@@ -143,8 +157,3 @@
   - [JS与aardio语法比较](web/js-aau.md)
   - [用网页设计程序界面](web/ui.md)
   - [执行命令](web/exec.md)
-
-
-## 相关资源
-
-- [官方帮助手册](http://bbs.aardio.com/doc/reference/)
