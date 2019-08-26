@@ -17,7 +17,7 @@
 - **开源**
   - 每个人都可以参与贡献。
   - 包括但不限于: 添加新功能、修复错误、同步官方文档、添加代码片段。
-  - 源码地址: https://github.com/wll8/doc/tree/master/aardio ，
+  - 源码地址: https://github.com/wll8/aardio_doc ，
   - 欢迎参与贡献~
 
 
