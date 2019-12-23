@@ -603,7 +603,7 @@ result, /*输出参数追加在返回值后面*/lpCaption = apifunc(result,hWnd,
       <td align="left">void*</td>
       <td align="left">结构体按引用传递，具有副作用的，即使不接收对应的返回值，结构体仍然可被API函数修改值。<br /><br />可以在API参数中使用空结构体
         {} 表示C/C++中的null结构体指针 <br /><br />请参考：<a
-          href="the%20language/function/parameter?id=table参数的副作用">table参数的副作用</a></td>
+          href="#/the%20language/function/parameter?id=table参数的副作用">table参数的副作用</a></td>
     </tr>
   </tbody>
 </table>
