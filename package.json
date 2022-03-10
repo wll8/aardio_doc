@@ -1,8 +1,0 @@
-{
-  "dependencies": {
-    "glob-all": "^3.1.0"
-  },
-  "scripts": {
-    "start": "docsify serve ."
-  }
-}
